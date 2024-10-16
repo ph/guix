@@ -60857,10 +60857,12 @@ Either of the Plain and LaTeX2e formats may be used with the package.")
                 "0y47q58jggwzy5hk9n2arh0g4a92pqcavadzxa38lpadf16zxbck"))))
     (outputs '("out" "doc"))
     (build-system texlive-build-system)
+    (properties '((updater-extra-native-inputs "texlive-kpathsea")))
     (arguments
      (list
       #:texlive-latex-bin? #f
       #:create-formats #~(list "luahbtex")))
+    (native-inputs (list texlive-kpathsea))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
