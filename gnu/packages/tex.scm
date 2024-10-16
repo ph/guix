@@ -48706,7 +48706,9 @@ MFLua without any modification to produce exactly the same result.")
                          (lambda _
                            (with-directory-excursion "texk/web2c"
                              (invoke "make" "mfluajit")
-                             (install-file ".libs/mfluajit" bin))))))
+                             (invoke "make" "mfluajit-nowin")
+                             (install-file ".libs/mfluajit" bin)
+                             (install-file ".libs/mfluajit-nowin" bin))))))
               (add-after 'unpack 'force-lua53-build
                 (lambda _
                   (substitute* "libs/configure"
@@ -48715,7 +48717,9 @@ MFLua without any modification to produce exactly the same result.")
                 (lambda _
                   (with-directory-excursion "texk/web2c"
                     (invoke "make" "mflua")
-                    (install-file ".libs/mflua" bin)))))))))
+                    (invoke "make" "mflua-nowin")
+                    (install-file ".libs/mflua" bin)
+                    (install-file ".libs/mflua-nowin" bin)))))))))
     (native-inputs (list pkg-config))
     (inputs (modify-inputs (package-inputs texlive-bin)
               (append potrace)))
