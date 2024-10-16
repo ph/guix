@@ -58112,7 +58112,11 @@ replacement for the @code{inputenc} package.")
                                "web2c/mktexupd")
                   (("^version=" m)
                    (format #false "PATH=\"~{~a:~}$PATH\"; export PATH~%~a"
-                           dirs m)))))))))
+                           dirs m))))))
+          (add-after 'unpack 'enable-all-configurations
+            (lambda _
+              (substitute* "web2c/fmtutil.cnf"
+                (("^#! ") "")))))))
     (inputs (list gawk sed))
     (propagated-inputs (list texlive-libkpathsea)) ;for the executables
     (home-page "https://ctan.org/pkg/kpathsea")
