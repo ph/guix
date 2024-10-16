@@ -58244,14 +58244,16 @@ formats.")
             ;; Create symbolic links for the latex variants.  We link lualatex
             ;; to luahbtex; see issue #51252 for details.
             (lambda* (#:key inputs #:allow-other-keys)
-              (let ((pdftex (search-input-file inputs "bin/pdftex"))
-                    (luahbtex (search-input-file inputs "bin/luahbtex"))
+              (let ((luahbtex (search-input-file inputs "bin/luahbtex"))
+                    (luatex (search-input-file inputs "bin/luatex"))
+                    (pdftex (search-input-file inputs "bin/pdftex"))
                     (bin (string-append #$output "/bin")))
                 (mkdir-p bin)
                 (with-directory-excursion bin
+                  (symlink luatex "dvilualatex")
                   (symlink pdftex "latex")
-                  (symlink pdftex "pdflatex")
-                  (symlink luahbtex "lualatex"))))))))
+                  (symlink luahbtex "lualatex")
+                  (symlink pdftex "pdflatex"))))))))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
