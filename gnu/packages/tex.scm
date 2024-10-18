@@ -223,7 +223,7 @@
 ;;;    package didn't propagate some inputs already.  Double check updater's
 ;;;    output, such issues are mentioned, and resolve them manually.
 ;;;
-;;;    Likewise, look for `(list)' artefacts the updater may have scattered
+;;;    Likewise, look for `(list)' artifacts the updater may have scattered
 ;;;    throughout this module.  They usually appear when all elements have
 ;;;    been removed from an input field.  In this situation, for aesthetics,
 ;;;    the whole field can be suppressed.
