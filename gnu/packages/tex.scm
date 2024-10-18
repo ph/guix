@@ -766,72 +766,6 @@ and should be preferred to it whenever a package would otherwise depend on
            (license:non-copyleft
             "file:///tex/generic/hyph-utf8/patterns/tex/hyph-sa.tex")))))
 
-(define-deprecated-package texlive-dehyph texlive-hyphen-complete)
-(define-deprecated-package texlive-generic-dehyph-exptl texlive-hyphen-complete)
-(define-deprecated-package texlive-generic-hyph-utf8 texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-afrikaans texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-ancientgreek texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-armenian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-basque texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-belarusian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-bulgarian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-catalan texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-chinese texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-churchslavonic texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-coptic texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-croatian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-czech texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-danish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-dutch texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-english texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-esperanto texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-estonian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-ethiopic texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-finnish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-french texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-friulan texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-galician texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-georgian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-german texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-greek texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-hungarian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-icelandic texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-indic texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-indonesian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-interlingua texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-irish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-italian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-kurmanji texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-latin texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-latvian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-lithuanian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-macedonian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-mongolian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-norwegian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-occitan texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-pali texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-piedmontese texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-polish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-portuguese texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-romanian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-romansh texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-russian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-sanskrit texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-schoolfinnish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-serbian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-slovak texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-slovenian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-spanish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-swedish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-thai texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-turkish texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-turkmen texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-ukrainian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-uppersorbian texlive-hyphen-complete)
-(define-deprecated-package texlive-hyphen-welsh texlive-hyphen-complete)
-(define-deprecated-package texlive-ruhyphen texlive-hyphen-complete)
-(define-deprecated-package texlive-ukrhyph texlive-hyphen-complete)
-
 (define-public texlive-bin
   (package
     (name "texlive-bin")
@@ -989,8 +923,6 @@ to typeset plain TeX or LaTeX documents in PostScript or PDF, using the
 Computer Modern fonts.  This scheme corresponds to @code{collection-basic} and
 @code{collection-latex}.")
     (license (license:fsf-free "https://www.tug.org/texlive/copying.html"))))
-
-(define-deprecated-package texlive-base texlive-scheme-basic)
 
 (define-public texlive-scheme-bookpub
   (package
@@ -1426,10 +1358,6 @@ ones.")
                              (cons license result))))
                         '()
                         (append default-packages packages))))))))
-
-(define-deprecated-package texlive-tiny texlive-scheme-basic)
-(define-deprecated/alias texlive-union texlive-updmap.cfg)
-(export texlive-union)
 
 (define-public texlive-12many
   (package
@@ -47610,8 +47538,6 @@ set up and one for initializing XeTeX character classes as has been carried
 out to date by @code{unicode-letters.tex}.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-generic-unicode-data texlive-unicode-data)
-
 (define-public texlive-hologo
   (package
     (name "texlive-hologo")
@@ -49491,8 +49417,6 @@ existing format source files to be used with newer engines, for example to
 adapt the plain e-TeX source file to work with XeTeX and LuaTeX.")
     (license license:public-domain)))
 
-(define-deprecated-package texlive-generic-tex-ini-files texlive-tex-ini-files)
-
 (define-public texlive-metafont
   (package
     (name "texlive-metafont")
@@ -49552,8 +49476,6 @@ adapt the plain e-TeX source file to work with XeTeX and LuaTeX.")
     (description "This package provides the Metafont base files needed to
 build fonts using the Metafont system.")
     (license license:knuth)))
-
-(define-deprecated-package texlive-metafont-base texlive-metafont)
 
 (define-public texlive-metatype1
   (package
@@ -49788,8 +49710,6 @@ information) for a font family that TeX needs to do any typesetting in these
 fonts.")
     (license license:lppl1.1+)))
 
-(define-deprecated-package texlive-tex-fontinst-base texlive-fontinst)
-
 (define-public texlive-fontname
   (package
     (name "texlive-fontname")
@@ -50021,8 +49941,6 @@ Computer Modern font family is a large collection of text, display, and
 mathematical fonts in a range of styles, based on Monotype Modern 8A.")
     (license license:knuth)))
 
-(define-deprecated-package texlive-fonts-cm texlive-cm)
-
 (define-public texlive-cmbright
   (package
     (name "texlive-cmbright")
@@ -50186,8 +50104,6 @@ quality.  The fonts exhibit the same metrics as the METAFONT-encoded
 originals.")
     ;; With font exception
     (license license:gpl2+)))
-
-(define-deprecated-package texlive-fonts-cm-super texlive-cm-super)
 
 (define-public texlive-cnbwp
   (package
@@ -50629,8 +50545,6 @@ Computers & Typesetting series.")
     ;; additional but not legally binding clause.
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-fonts-lm texlive-lm)
-
 (define-public texlive-lm-math
   (package
     (name "texlive-lm-math")
@@ -50720,8 +50634,6 @@ conversion software and word processors.")
 Knuth, including the plain format, plain base, and the MF logo fonts.")
     (license license:knuth)))
 
-(define-deprecated-package texlive-fonts-knuth-lib texlive-knuth-lib)
-
 (define-public texlive-knuth-local
   (package
     (name "texlive-knuth-local")
@@ -50806,8 +50718,6 @@ classes. It includes invisible fonts (for use with the slides class), line and
 circle fonts (for use in the @code{picture} environment) and LaTeX symbol
 fonts.")
     (license license:lppl1.2+)))
-
-(define-deprecated-package texlive-fonts-latex texlive-latex-fonts)
 
 (define-public texlive-latex-make
   (package
@@ -51196,8 +51106,6 @@ Knuthian mflogo fonts described in The Metafontbook and to typeset Metafont
 logos in LaTeX documents.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-mflogo texlive-mflogo)
-
 (define-public texlive-mflogo-font
   (package
     (name "texlive-mflogo-font")
@@ -51226,8 +51134,6 @@ also be expressed.  The fonts were originally issued (of course) as Metafont
 source; they have since been autotraced and reissued in Adobe Type 1 format by
 Taco Hoekwater.")
     (license license:knuth)))
-
-(define-deprecated-package texlive-fonts-mflogo-font texlive-mflogo-font)
 
 (define-public texlive-mfware
   (package
@@ -57572,9 +57478,6 @@ Modern family of fonts.  The Euler fonts are supported by separate packages;
 details can be found in the documentation.")
     (license license:silofl1.1)))
 
-(define-deprecated-package texlive-fonts-amsfonts texlive-amsfonts)
-(define-deprecated-package texlive-latex-amsfonts texlive-amsfonts)
-
 (define-public texlive-mkpattern
   (package
     (name "texlive-mkpattern")
@@ -57636,8 +57539,6 @@ Modern-style T1-encoded Type 1 set, Latin Modern, is not actually a direct
 development of the EC set, and differs from the EC in a number of
 particulars.")
     (license (license:fsf-free "file://doc/fonts/ec/copyrite.txt"))))
-
-(define-deprecated-package texlive-fonts-ec texlive-ec)
 
 ;; This provides etex.src which is needed to build various formats, including
 ;; luatex.fmt and pdflatex.fmt
@@ -57764,8 +57665,6 @@ certain text fonts, e.g., Minion.")
 described in the TeXbook, together with various supporting files (some also
 discussed in the book).")
     (license license:knuth)))
-
-(define-deprecated-package texlive-tex-plain texlive-plain)
 
 (define-public texlive-pxfonts
   (package
@@ -58287,8 +58186,6 @@ formats.")
 several packages that are considered as part of the LaTeX kernel.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-base texlive-latex-bin)
-
 (define-public texlive-atenddvi
   (package
     (name "texlive-atenddvi")
@@ -58415,8 +58312,6 @@ after the last @code{\\clearpage} before the @file{.aux} file is closed.
 the @file{.aux} file.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-atveryend texlive-atveryend)
-
 (define-public texlive-automata
   (package
     (name "texlive-automata")
@@ -58467,8 +58362,6 @@ of nodes and the styles of edges, may be adjusted.")
      "This package provides hooks for adding code at the beginning of
 @file{.aux} files.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-auxhook texlive-auxhook)
 
 (define-public texlive-epspdf
   (package
@@ -58573,8 +58466,6 @@ when running under pdfTeX.  If an EPS graphic is detected, the package spawns
 a process to convert the EPS to PDF, using the script @command{epstopdf}.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-epstopdf-pkg texlive-epstopdf-pkg)
-
 (define-public texlive-filecontents
   (package
     (name "texlive-filecontents")
@@ -58604,8 +58495,6 @@ a document.  The filecontents package removes these limitations, letting you
 overwrite existing files and letting you use @code{filecontents}
 @code{filecontents*} anywhere.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-filecontents texlive-filecontents)
 
 (define-public texlive-filehook
   (package
@@ -58664,8 +58553,6 @@ bundle of packages.  (The latex-graphics bundle is also available to Plain TeX
 users, via its Plain TeX version.)")
     (license license:public-domain)))
 
-(define-deprecated-package texlive-generic-epsf texlive-epsf)
-
 (define-public texlive-fancyvrb
   (package
     (name "texlive-fancyvrb")
@@ -58692,8 +58579,6 @@ save and restore verbatim text and environments; write and read files in
 verbatim mode; build \"example\" environments (showing both result and
 verbatim source).")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-fancyvrb texlive-fancyvrb)
 
 (define-public texlive-fandol
   (package
@@ -58915,8 +58800,6 @@ documents.  It comprises the packages @code{color}, @code{graphics},
 @code{lscape}.")
     (license license:lppl1.3c)))
 
-(define-deprecated-package texlive-latex-graphics texlive-graphics)
-
 (define-public texlive-greek-fontenc
   (package
     (name "texlive-greek-fontenc")
@@ -59040,8 +58923,6 @@ packages @code{hyperref} and @code{bookmark}.  It is not intended as a package
 for the user.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-hycolor texlive-hycolor)
-
 (define-public texlive-xcjk2uni
   (package
     (name "texlive-xcjk2uni")
@@ -59116,8 +58997,6 @@ between eight color models.  Additionally, there is a command for alternating
 row colors plus repeated non-aligned material (like horizontal lines) in
 tables.")
     (license license:lppl1.2+)))
-
-(define-deprecated-package texlive-latex-xcolor texlive-xcolor)
 
 (define-public texlive-xltxtra
   (package
@@ -59399,8 +59278,6 @@ pdf and HTML backends.  The package is distributed with the @code{backref} and
 @code{nameref} packages, which make use of the facilities of
 @code{hyperref}.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-hyperref texlive-hyperref)
 
 (define-public texlive-hypdoc
   (package
@@ -59872,8 +59749,6 @@ better accessibility support for PDF files; extensible chemists reaction
 arrows; record information about document class(es) used; and many more.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-oberdiek texlive-oberdiek)
-
 (define-public texlive-regexpatch
   (package
     (name "texlive-regexpatch")
@@ -59927,8 +59802,6 @@ experimental packages.")
      "This package provides additional rerun warnings if some auxiliary files
 have changed.  It is based on MD5 checksum, provided by pdfTeX.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-rerunfilecheck texlive-rerunfilecheck)
 
 (define-public texlive-onedown
   (package
@@ -59992,8 +59865,6 @@ are part of the LaTeX required tools distribution, comprising the packages:
 @code{varioref}, @code{verbatim}, @code{xr}, and @code{xspace}.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-tools texlive-tools)
-
 (define-public texlive-url
   (package
     (name "texlive-url")
@@ -60023,8 +59894,6 @@ of file names.")
     ;; The license header states that it is under LPPL version 2 or later, but
     ;; the latest version is 1.3c.
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-url texlive-url)
 
 (define-public texlive-l3experimental
   (package
@@ -60127,8 +59996,6 @@ built: it is an API for TeX programmers.  The packages are set up so that the
 LaTeX3 conventions can be used with regular LaTeX2e packages.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-l3kernel texlive-l3kernel)
-
 (define-public texlive-l3backend
   (package
     (name "texlive-l3backend")
@@ -60163,9 +60030,6 @@ here are defined differently depending on the engine in use.  As such, these
 are distributed separately from l3kernel to allow this code to be updated on
 an independent schedule.")
     (license license:lppl1.3c)))
-
-(define-deprecated-package texlive-dvips-l3backend texlive-l3backend)
-(define-deprecated-package texlive-latex-l3backend texlive-l3backend)
 
 (define-public texlive-l3packages
   (package
@@ -60221,8 +60085,6 @@ available for use by LaTeX 2e packages, @code{xtemplate}, which provides
 a means of defining generic functions using a key-value syntax, and
 @code{xfrac}, which provides flexible split-level fractions.")
     (license license:lppl1.3c)))
-
-(define-deprecated-package texlive-latex-l3packages texlive-l3packages)
 
 (define-public texlive-fonts-churchslavonic
   (package
@@ -60280,8 +60142,6 @@ which are intended for Unicode TeX engines only.")
 automatic and unified interface to feature-rich AAT and OpenType fonts through
 the NFSS in LaTeX running on XeTeX or LuaTeX engines.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-fontspec texlive-fontspec)
 
 (define-public texlive-grffile
   (package
@@ -60672,8 +60532,6 @@ The bundle is based on lua modules shipped with ConTeXt, and made available in
 this bundle for use independent of ConTeXt.")
     (license license:gpl2)))
 
-(define-deprecated-package texlive-luatex-lualibs texlive-lualibs)
-
 (define-public texlive-lua-alt-getopt
   (package
     (name "texlive-lua-alt-getopt")
@@ -60960,8 +60818,6 @@ compatibilitywith XeTeX.  By indexing metadata in a database it facilitates
 loading fonts by their proper names instead of file names.")
     (license license:gpl2)))
 
-(define-deprecated-package texlive-luatex-luaotfload texlive-luaotfload)
-
 (define-public texlive-amsmath
   (package
     (name "texlive-amsmath")
@@ -60993,8 +60849,6 @@ appeal; examples are @code{empheq}, which provides functions for decorating
 and highlighting mathematics, and @code{ntheorem}, for specifying theorem (and
 similar) definitions.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-amsmath texlive-amsmath)
 
 (define-public texlive-amsmath-it
   (package
@@ -61123,8 +60977,6 @@ proceedings), together with some supporting material.  The material is made
 available as part of the AMS-LaTeX distribution.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-amscls texlive-amscls)
-
 (define-public texlive-babel
   (package
     (name "texlive-babel")
@@ -61176,8 +61028,6 @@ ways.  Babel uses contributed configuration files that provide the detail of
 what has to be done for each language.  Users of XeTeX are advised to use the
 polyglossia package rather than Babel.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-babel texlive-babel)
 
 (define-public texlive-babelbib
   (package
@@ -61942,8 +61792,6 @@ for British English and Australian text, and default (american) patterns for
 Canadian and USA text.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-generic-babel-english texlive-babel-english)
-
 (define-public texlive-babel-esperanto
   (package
     (name "texlive-babel-esperanto")
@@ -62020,8 +61868,6 @@ Estonian of standard LaTeX names.")
      "The package establishes French conventions in a document (or a subset of
 the conventions, if French is not the main language of the document).")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-generic-babel-french texlive-babel-french)
 
 (define-public texlive-babel-friulan
   (package
@@ -62125,8 +61971,6 @@ German documents.  The bundle includes support for the traditional and
 reformed German orthography as well as for the Austrian and Swiss varieties of
 German.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-generic-babel-german texlive-babel-german)
 
 (define-public texlive-babel-greek
   (package
@@ -63145,8 +62989,6 @@ T2* and X2 encodings.  These encodings cover (between them) pretty much every
 language that is written in a Cyrillic alphabet.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-cyrillic texlive-cyrillic)
-
 (define-public texlive-passivetex
   (package
     (name "texlive-passivetex")
@@ -63238,8 +63080,6 @@ means to select single glyphs from symbol fonts.  The bundle as a whole is
 part of the LaTeX required set of packages.")
     (license license:lppl1.2+)))
 
-(define-deprecated-package texlive-latex-psnfss texlive-psnfss)
-
 (define-public texlive-ifplatform
   (package
     (name "texlive-ifplatform")
@@ -63270,8 +63110,6 @@ and @code{\\ifcygwin}.  The package also preserves the output of
 @command{uname} on a Unix-like system, which may be used to distinguish
 between various classes of Unix systems.")
     (license license:lppl1.3c)))
-
-(define-deprecated-package texlive-latex-ifplatform texlive-ifplatform)
 
 (define-public texlive-ifptex
   (package
@@ -63323,9 +63161,6 @@ the @code{\\RequirePDFTeX}, @code{\\RequireXeTeX}, and @code{\\RequireLuaTeX}
 commands which throw an error if pdfTeX, XeTeX or LuaTeX (respectively) is not
 the engine in use.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-generic-iftex texlive-iftex)
-(define-deprecated-package texlive-generic-ifxetex texlive-iftex)
 
 (define-public texlive-ifxptex
   (package
@@ -63434,8 +63269,6 @@ adapted to make direct processing by LaTeX easier.  The package can be used
 either in conjunction with BibTeX or as a replacement for BibTeX.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-amsrefs texlive-amsrefs)
-
 (define-public texlive-bigfoot
   (package
     (name "texlive-bigfoot")
@@ -63468,8 +63301,6 @@ The @code{bigfoot} bundle also provides the @code{perpage} and @code{suffix}
 packages.")
     (license license:gpl2+)))
 
-(define-deprecated-package texlive-latex-bigfoot texlive-bigfoot)
-
 (define-public texlive-blindtext
   (package
     (name "texlive-blindtext")
@@ -63499,8 +63330,6 @@ supports three languages, @code{english}, @code{(n)german} and @code{latin};
 the @code{latin} option provides a short \"lorem ipsum\" (for a fuller \"lorem
 ipsum\" text, see the @code{lipsum} package).")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-blindtext texlive-blindtext)
 
 (define-public texlive-dinbrief
   (package
@@ -63544,8 +63373,6 @@ English names from which the user can recognize what they are used for.  In
 addition there are example files showing how letters may be created with the
 package.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-dinbrief texlive-dinbrief)
 
 (define-public texlive-draftwatermark
   (package
@@ -63708,8 +63535,6 @@ for collecting the body text of an environment.  These commands are used to
 define a new author interface to creating new environments.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-environ texlive-environ)
-
 (define-public texlive-epsincl
   (package
     (name "texlive-epsincl")
@@ -63765,8 +63590,6 @@ for a variety of alignment purposes, as is evidenced by the examples in
 also provided.")
     (license license:lppl1.3c)))
 
-(define-deprecated-package texlive-latex-eqparbox texlive-eqparbox)
-
 (define-public texlive-etoc
   (package
     (name "texlive-etoc")
@@ -63805,8 +63628,6 @@ same document, while @code{\\localtableofcontents} provides a local table of
 contents.")
     (license license:lppl1.3c)))
 
-(define-deprecated-package texlive-latex-etoc texlive-etoc)
-
 (define-public texlive-expdlist
   (package
     (name "texlive-expdlist")
@@ -63834,8 +63655,6 @@ a list (for example, to interpose a comment) without affecting the structure
 of the list (this works for itemize and eumerate lists and numbered lists
 remain in sequence).")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-expdlist texlive-expdlist)
 
 (define-public texlive-expressg
   (package
@@ -63998,8 +63817,6 @@ output with recent versions of the LaTeX compiler which uses pdfLaTeX in DVI
 mode.  The functionality is provided by purely expandable macros or by faster
 but non-expandable ones.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-filemod texlive-filemod)
 
 (define-public texlive-fix2col
   (package
@@ -64237,8 +64054,6 @@ Easter nomogram.")
 paragraphs.  The package also enables typesetting with hanging punctuation,
 by making punctuation characters active.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-hanging texlive-hanging)
 
 (define-public texlive-fira
   (package
@@ -64945,8 +64760,6 @@ bibliography styles produced by custom-bib are designed from the start to be
 compatible with @code{natbib}.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-natbib texlive-natbib)
-
 (define-public texlive-newfloat
   (package
     (name "texlive-newfloat")
@@ -64971,8 +64784,6 @@ compatible with @code{natbib}.")
 which the user may use to define new floating environments which behave like
 the LaTeX standard foating environments @code{figure} and @code{table}.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-newfloat texlive-newfloat)
 
 (define-public texlive-newpax
   (package
@@ -65026,8 +64837,6 @@ major engines.")
 Unicode characters.  The document should be processed by (pdf)LaTeX with the
 Unicode option of @code{inputenc} or @code{inputenx}, or by XeLaTeX/LuaLaTeX.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-newunicodechar texlive-newunicodechar)
 
 (define-public texlive-newverbs
   (package
@@ -65293,8 +65102,6 @@ used for drawing some plots.  The package uses Lua's @code{zip} library.")
 available for LuaTeX by reimplementing them using Lua.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-pdftexcmds texlive-pdftexcmds)
-
 (define-public texlive-philokalia
   (package
     (name "texlive-philokalia")
@@ -65404,8 +65211,6 @@ a user specified LaTeX construction, properly aligned, scaled, and/or
 rotated.")
     (license (license:fsf-free "file://psfrag.dtx"))))
 
-(define-deprecated-package texlive-latex-psfrag texlive-psfrag)
-
 (define-public texlive-psfrag-italian
   (package
     (name "texlive-psfrag-italian")
@@ -65453,8 +65258,6 @@ labels within pdfLaTeX documents.  Every graphic is compiled individually,
 drastically speeding up compilation time when only a single figure needs
 re-processing.")
     (license license:lppl1.3c)))
-
-(define-deprecated-package texlive-latex-pstool texlive-pstool)
 
 (define-public texlive-ptext
   (package
@@ -65534,8 +65337,6 @@ from the reference as the value to put into the counter.  It also provides
 @code{\\setcounterpageref} and @code{\\addtocounterpageref} that do the
 corresponding thing with the page reference of the label.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-refcount texlive-refcount)
 
 (define-public texlive-repere
   (package
@@ -65782,8 +65583,6 @@ recent classes such as @code{powerdot} or @code{beamer}, both of which are
 tuned to 21st-century presentation styles.")
     (license license:lppl1.2+)))
 
-(define-deprecated-package texlive-latex-seminar texlive-seminar)
-
 (define-public texlive-sepnum
   (package
     (name "texlive-sepnum")
@@ -65840,8 +65639,6 @@ be found, such as in base-sequences in genes or calculations of transcendental
 numbers.  While the package may obviously be used to typeset DNA sequences, the
 user may consider the @code{dnaseq} as a rather more powerful alternative.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-seqsplit texlive-seqsplit)
 
 (define-public texlive-shapes
   (package
@@ -66069,8 +65866,6 @@ variety of customizable ways.  A number of useful macros are provided, all
 of which make use of the @code{stackengine} core.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-stackengine texlive-stackengine)
-
 (define-public texlive-suanpan
   (package
     (name "texlive-suanpan")
@@ -66219,8 +66014,6 @@ Contents}, @dfn{List of Figures} and @dfn{List of Tables}, and the ability to
 create new @samp{List of ...}.  The ToC @code{\\parskip} may be changed.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-tocloft texlive-tocloft)
-
 (define-public texlive-tocvsec2
   (package
     (name "texlive-tocvsec2")
@@ -66312,8 +66105,6 @@ remove spaces around a token list (commands are provided to remove spaces
 before, spaces after, or both); or to remove surrounding spaces within a macro
 definition, or to define space-stripped macros.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-trimspaces texlive-trimspaces)
 
 (define-public texlive-tufte-latex
   (package
@@ -66973,8 +66764,6 @@ fonts.")
 to something that's not a float.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-capt-of texlive-capt-of)
-
 (define-public texlive-carlisle
   (package
     (name "texlive-carlisle")
@@ -67079,8 +66868,6 @@ hyperlink to the target of the DOI.")
     ;; Any version of the LPPL.
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-doi texlive-doi)
-
 (define-public texlive-etoolbox
   (package
     (name "texlive-etoolbox")
@@ -67109,8 +66896,6 @@ some LaTeX kernel commands; nevertheless, the package will not modify any part
 of the LaTeX kernel.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-etoolbox texlive-etoolbox)
-
 (define-public texlive-fncychap
   (package
     (name "texlive-fncychap")
@@ -67136,8 +66921,6 @@ style can be modified using a set of simple commands.  Optionally one can
 modify the formatting routines in order to create additional chapter
 headings.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-fncychap texlive-fncychap)
 
 (define-public texlive-framed
   (package
@@ -67170,8 +66953,6 @@ course of the framed/shaded matter.  There is also a command
     ;; or modified for any purpose provided that this notice is left intact."
     (license (license:fsf-free "file://framed.sty"))))
 
-(define-deprecated-package texlive-latex-framed texlive-framed)
-
 (define-public texlive-g-brief
   (package
     (name "texlive-g-brief")
@@ -67199,8 +66980,6 @@ are LaTeX 2.09 @code{documentstyle} and LaTeX 2e class files for both an old
 and a new version of @code{g-brief}.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-g-brief texlive-g-brief)
-
 (define-public texlive-galois
   (package
     (name "texlive-galois")
@@ -67225,8 +67004,6 @@ and a new version of @code{g-brief}.")
      "The package deals with connections in two-dimensional style, optionally
 in colour.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-galois texlive-galois)
 
 (define-public texlive-gcite
   (package
@@ -67256,8 +67033,6 @@ made.  It combines a desire to eliminate unnecessary page-turning with the
 look-up efficiency afforded by numeric citations.  The package makes use of
 BibLaTeX, and is considered experimental.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-gcite texlive-gcite)
 
 (define-public texlive-gckanbun
   (package
@@ -67349,8 +67124,6 @@ name (such as a4, letter, etc.).  An important feature is the package's
 ability to communicate the paper size it's set up to the output.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-geometry texlive-geometry)
-
 (define-public texlive-mdwtools
   (package
     (name "texlive-mdwtools")
@@ -67380,8 +67153,6 @@ which adds some minor changes to LaTeX maths; a rewrite of LaTeX's
 @code{tabular} and @code{array} environments; verbatim handling; and syntax
 diagrams.")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-latex-mdwtools texlive-mdwtools)
 
 (define-public texlive-makecmds
   (package
@@ -67511,8 +67282,6 @@ This package implements a solution to make @code{marginpars} just work by
 keeping a list of floating inserts and arranging them intelligently in the
 output routine.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-marginfix texlive-marginfix)
 
 (define-public texlive-metalogo
   (package
@@ -67710,8 +67479,6 @@ written from right to left.
 @end itemize")
     (license license:expat)))
 
-(define-deprecated-package texlive-latex-polyglossia texlive-polyglossia)
-
 (define-public texlive-przechlewski-book
   (package
     (name "texlive-przechlewski-book")
@@ -67791,8 +67558,6 @@ flexible, in many cases, but @code{supertabular} retains its usefulness in
 a few situations where longtable has problems.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-supertabular texlive-supertabular)
-
 (define-public texlive-tap
   (package
     (name "texlive-tap")
@@ -67843,8 +67608,6 @@ source.  The Texinfo macros may be used to produce printable output using TeX;
 other programs in the distribution offer online interactive use (with
 hypertext linkages in some cases).")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-tex-texinfo texlive-texinfo)
 
 (define-public texlive-textcase
   (package
@@ -67913,8 +67676,6 @@ use, so long as the package is loaded after the other fonts were.  The package
 does not affect @code{\\tt}, @code{\\texttt}, etc.")
     (license license:lppl1.2+)))
 
-(define-deprecated-package texlive-latex-upquote texlive-upquote)
-
 (define-public texlive-anysize
   (package
     (name "texlive-anysize")
@@ -67939,8 +67700,6 @@ does not affect @code{\\tt}, @code{\\texttt}, etc.")
 considered obsolete; alternatives are the @code{typearea} package from the
 @code{koma-script} bundle, or the @code{geometry} package.")
     (license license:public-domain)))
-
-(define-deprecated-package texlive-latex-anysize texlive-anysize)
 
 (define-public texlive-appendix
   (package
@@ -67969,8 +67728,6 @@ be used, for example, for per chapter/section appendices.  An
 @code{appendices} environment is provided which can be used instead of the
 @code{\\appendix} command.")
     (license license:lppl1.3c)))
-
-(define-deprecated-package texlive-latex-appendix texlive-appendix)
 
 (define-public texlive-bookman
   (package
@@ -68029,8 +67786,6 @@ Adobe's basic set")
 action types are available (URI, GoToR, Named).")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-bookmark texlive-bookmark)
-
 (define-public texlive-changebar
   (package
     (name "texlive-changebar")
@@ -68058,8 +67813,6 @@ package uses drivers to place the bars; the available drivers can work with
 @code{dvitoln03}, @code{dvitops}, @code{dvips}, the emTeX and TeXtures DVI
 drivers, and VTeX and pdfTeX.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-changebar texlive-changebar)
 
 (define-public texlive-checkcites
   (package
@@ -68189,8 +67942,6 @@ the hide and show options.")
 copy-and-paste functions work properly.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-cmap texlive-cmap)
-
 (define-public texlive-colorprofiles
   (package
     (name "texlive-colorprofiles")
@@ -68239,8 +67990,6 @@ LaTeX packages to access them.")
      "The package allows rows and columns to be coloured, and even
 individual cells.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-colortbl texlive-colortbl)
 
 (define-public texlive-combofont
   (package
@@ -68316,8 +68065,6 @@ using box macros and flexible verbatim macros.  You can box mathematics,
 floats, center, flushleft, and flushright, lists, and pages.")
     (license license:lppl1.2+)))
 
-(define-deprecated-package texlive-latex-fancybox texlive-fancybox)
-
 (define-public texlive-fancyhdr
   (package
     (name "texlive-fancyhdr")
@@ -68342,8 +68089,6 @@ floats, center, flushleft, and flushright, lists, and pages.")
 and footers, and for controlling their use (for example, at times when LaTeX
 would automatically change the heading style in use).")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-fancyhdr texlive-fancyhdr)
 
 (define-public texlive-fancyhdr-it
   (package
@@ -68422,8 +68167,6 @@ behaviour of the old ones.  The package also provides the @samp{H} float
 modifier option of the obsolete @code{here} package.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-float texlive-float)
-
 (define-public texlive-footmisc
   (package
     (name "texlive-footmisc")
@@ -68451,8 +68194,6 @@ a way to number footnotes per page, to make footnotes disappear in a
 the same place.  The package also has a range of techniques for labelling
 footnotes with symbols rather than numbers.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-footmisc texlive-footmisc)
 
 (define-public texlive-footnotehyper
   (package
@@ -68506,8 +68247,6 @@ optional arguments or for macros that are defined as robust macros by
 @code{\\DeclareRobustCommand}.  This package defines @code{\\LetLtxMacro} that
 also takes care of the involved internal macros.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-letltxmacro texlive-letltxmacro)
 
 (define-public texlive-frankenstein
   (package
@@ -68576,8 +68315,6 @@ and a BibTeX bibliography style.  The individual packages are: @code{abbrevs},
     ;; COPYING, which is missing. However, the individual files mention LPPL
     ;; 1.2 or later.
     (license license:lppl1.2+)))
-
-(define-deprecated-package texlive-latex-frankenstein texlive-frankenstein)
 
 (define-public texlive-kantlipsum
   (package
@@ -68753,8 +68490,6 @@ The package requires the e-TeX extensions under pdfTeX (in either PDF or DVI
 output mode).")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-listings texlive-listings)
-
 (define-public texlive-jknapltx
   (package
     (name "texlive-jknapltx")
@@ -68784,9 +68519,6 @@ extra alignments for @code{\\parboxes}; swap Roman and Sans fonts;
 transliterate semitic languages; patches to make (La)TeX formulae embeddable
 in SGML; use maths minus in text as appropriate; simple Young tableaux.")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-latex-jknapltx texlive-jknapltx)
-(define-deprecated-package texlive-jknappen texlive-jknapltx)
 
 (define-public texlive-jmn
   (package
@@ -68834,8 +68566,6 @@ in SGML; use maths minus in text as appropriate; simple Young tableaux.")
      "This package provides facilities for using key-value format in
 package options.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-kvoptions texlive-kvoptions)
 
 (define-public texlive-ekdosis
   (package
@@ -69155,8 +68885,6 @@ Adobe's basic set.")
     ;; No license version specified.
     (license license:gpl3+)))
 
-(define-deprecated-package texlive-fonts-adobe-times texlive-times)
-
 (define-public texlive-palatino
   (package
     (name "texlive-palatino")
@@ -69188,8 +68916,6 @@ Adobe's basic set.")
 Adobe's basic set.")
     ;; No license version specified.
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-fonts-adobe-palatino texlive-palatino)
 
 (define-public texlive-poltawski
   (package
@@ -69470,8 +69196,6 @@ an interface for macro programmers to access the new reference scheme and some
 modules that use it.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-fonts-adobe-zapfding texlive-zapfding)
-
 (define-public texlive-rsfs
   (package
     (name "texlive-rsfs")
@@ -69506,8 +69230,6 @@ font).  The fonts are provided as Metafont source, and as derived Adobe Type
 1 format.  LaTeX support, for using these fonts in mathematics, is available
 via one of the packages @code{calrsfs} and @code{mathrsfs}.")
     (license (license:fsf-free "http://mirrors.ctan.org/fonts/rsfs/README"))))
-
-(define-deprecated-package texlive-fonts-rsfs texlive-rsfs)
 
 (define-public texlive-es-tex-faq
   (package
@@ -69606,8 +69328,6 @@ routine, which may be used to place the output at fixed positions.  The
 @code{grid} option may be used to find the correct places.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-eso-pic texlive-eso-pic)
-
 (define-public texlive-eepic
   (package
     (name "texlive-eepic")
@@ -69635,8 +69355,6 @@ much faster with much less TeX memory, and providing several new commands for
 drawing ellipses, arcs, splines, and filled circles and ellipses.")
     (license license:public-domain)))
 
-(define-deprecated-package texlive-latex-eepic texlive-eepic)
-
 (define-public texlive-enotez
   (package
     (name "texlive-enotez")
@@ -69659,8 +69377,6 @@ drawing ellipses, arcs, splines, and filled circles and ellipses.")
      "This package allows nested endnotes, supports @code{hyperref} and
 provides means for easy customization of the list of notes.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-enotez texlive-enotez)
 
 (define-public texlive-endnotes
   (package
@@ -69739,8 +69455,6 @@ the layout of labels, and to clone the standard environments, to create new
 environments with counters of their own.")
     (license license:expat)))
 
-(define-deprecated-package texlive-latex-enumitem texlive-enumitem)
-
 (define-public texlive-multido
   (package
     (name "texlive-multido")
@@ -69795,8 +69509,6 @@ the @code{bigdelim} and @code{bigstrut} packages, which can be used to
 advantage with @code{\\multirow} cells.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-multirow texlive-multirow)
-
 (define-public texlive-overpic
   (package
     (name "texlive-overpic")
@@ -69825,8 +69537,6 @@ the included graphic.  LaTeX commands can be placed on the graphic at defined
 positions; a grid for orientation is available.")
     (license license:lppl1.0+)))
 
-(define-deprecated-package texlive-latex-overpic texlive-overpic)
-
 (define-public texlive-parskip
   (package
     (name "texlive-parskip")
@@ -69853,8 +69563,6 @@ that is untidy; this package (though it is no substitute for a properly
 designed class) helps alleviate this untidiness.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-parskip texlive-parskip)
-
 (define-public texlive-pbox
   (package
     (name "texlive-pbox")
@@ -69880,8 +69588,6 @@ designed class) helps alleviate this untidiness.")
 to that of the enclosed text, up to the maximum width given.  The package also
 defines some associated length commands.")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-latex-pbox texlive-pbox)
 
 (define-public texlive-pdfpages
   (package
@@ -69912,8 +69618,6 @@ hypertext features like hyperlinks and article threads are provided.  The
 package supports pdfTeX (pdfLaTeX) and VTeX.  With VTeX it is even possible to
 use this package to insert PostScript files, in addition to PDF files.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-pdfpages texlive-pdfpages)
 
 (define-public texlive-stix2-otf
   (package
@@ -69968,8 +69672,6 @@ captions sideways.  Options include @code{outercaption}, @code{innercaption},
 @code{leftcaption} and @code{rightcaption}.")
     (license license:lppl1.0+)))
 
-(define-deprecated-package texlive-latex-sidecap texlive-sidecap)
-
 (define-public texlive-stmaryrd
   (package
     (name "texlive-stmaryrd")
@@ -70014,8 +69716,6 @@ use under LaTeX; the package supports the @code{only} option (provided by the
 @code{somedefs} package) to restrict what is loaded, for those who don't need
 the whole font.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-fonts-stmaryrd texlive-stmaryrd)
 
 (define-public texlive-subfig
   (package
@@ -70080,8 +69780,6 @@ considered obsolete: it was superseded by @code{subfig}, but users may find
 the more recent @code{subcaption} package more satisfactory.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-subfigure texlive-subfigure)
-
 (define-public texlive-tabulary
   (package
     (name "texlive-tabulary")
@@ -70110,8 +69808,6 @@ variable width columns (@code{\\raggedright}, @code{\\centering},
 @code{tabularx}'s @code{X} columns, the width of each column is weighted
 according to the natural width of the widest cell in the column.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-tabulary texlive-tabulary)
 
 (define-public texlive-tamethebeast
   (package
@@ -70545,8 +70241,6 @@ TeX metrics (VF and TFM files) and macros for use with LaTeX.")
     ;; Any version of the GPL with font exception.
     (license license:gpl3+)))
 
-(define-deprecated-package texlive-fonts-txfonts texlive-txfonts)
-
 (define-public texlive-typehtml
   (package
     (name "texlive-typehtml")
@@ -70606,8 +70300,6 @@ typesetting of newspapers and similar periodicals.  The Iwona fonts are an
 alternative version of the Kurier fonts.  The difference lies in the absence
 of ink traps which typify the Kurier font.")
     (license license:gfl1.0)))
-
-(define-deprecated-package texlive-fonts-iwona texlive-iwona)
 
 (define-public texlive-jadetex
   (package
@@ -71046,8 +70738,6 @@ styles.  It also includes a package to change the page styles when there are
 floats in a page.  You may assign headers/footers to individual floats, too.")
     (license license:expat)))
 
-(define-deprecated-package texlive-latex-titlesec texlive-titlesec)
-
 (define-public texlive-type1cm
   (package
     (name "texlive-type1cm")
@@ -71077,8 +70767,6 @@ PCTeX, etc.).  Note that the LaTeX distribution now contains a package
 @code{fix-cm}, which performs the task of @code{type1cm}, as well as doing the
 same job for T1- and TS1-encoded @code{ec} fonts.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-type1cm texlive-type1cm)
 
 (define-public texlive-lh
   (package
@@ -71129,8 +70817,6 @@ standard T2* and X2 encodings are available in Adobe Type 1 format, in the
 CM-Super family of fonts.  The package also offers its own LaTeX support for
 OT2 encoded fonts, CM bright shaped fonts and Concrete shaped fonts.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-lh texlive-lh)
 
 (define-public texlive-marvosym
   (package
@@ -71258,8 +70944,6 @@ than the bitmaps Metafont creates.")
 Association for Computing Machinery (ACM).")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-acmart texlive-acmart)
-
 (define-public texlive-varwidth
   (package
     (name "texlive-varwidth")
@@ -71283,8 +70967,6 @@ Association for Computing Machinery (ACM).")
 but the specified width is just a maximum value -- the box may get a narrower
 natural width.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-varwidth texlive-varwidth)
 
 (define-public texlive-wasy
   (package
@@ -71365,8 +71047,6 @@ like male and female symbols and astronomical symbols, as well as the complete
 implements an easy to use interface for these symbols.")
     (license license:lppl1.3c)))
 
-(define-deprecated-package texlive-latex-wasysym texlive-wasysym)
-
 (define-public texlive-willowtreebook
   (package
     (name "texlive-willowtreebook")
@@ -71416,8 +71096,6 @@ class.")
 It does not work in combination with list environments, but can be used in a
 @code{parbox} or @code{minipage}, and in two-column format.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-wrapfig texlive-wrapfig)
 
 (define-public texlive-ucharcat
   (package
@@ -71476,8 +71154,6 @@ Glyph production may be controlled by various options, which permits use of
 non-ASCII characters when coding mathematical formulae.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-ucs texlive-ucs)
-
 (define-public texlive-preview
   (package
     (name "texlive-preview")
@@ -71507,8 +71183,6 @@ dvipng, but it also works when you are using PDFTeX for generating PDF
 files.")
     (license license:gpl3+)))
 
-(define-deprecated-package texlive-latex-preview texlive-preview)
-
 (define-public texlive-acronym
   (package
     (name "texlive-acronym")
@@ -71535,8 +71209,6 @@ acronyms used.  The package is compatible with PDF bookmarks.  The package
 requires the @code{suffix} package, which in turn requires that it runs under
 e-TeX.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-acronym texlive-acronym)
 
 (define-public texlive-pdftex
   (package
@@ -71599,8 +71271,6 @@ e-TeX.")
      "This package is an extension of TeX which can directly generate PDF
 documents as well as DVI output.")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-generic-pdftex texlive-pdftex)
 
 (define-public texlive-biber
   (package
@@ -71752,8 +71422,6 @@ documents as well as DVI output.")
 UTF-8, can (re)-encode input and output, supports highly configurable sorting,
 dynamic bibliography sets and many other features.")
     (license license:artistic2.0)))
-
-(define-deprecated-package biber texlive-biber)
 
 (define-public rubber
   (package
@@ -72061,8 +71729,6 @@ The package is based on the RichMedia Annotation, an Adobe addition to the PDF
 specification.  It replaces the now obsolete @code{movie15} package.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-media9 texlive-media9)
-
 (define-public texlive-ocgx2
   (package
     (name "texlive-ocgx2")
@@ -72089,8 +71755,6 @@ creation of PDF Layers.  It re-implements the functionality of the @code{ocg},
 and back-ends.  It also ensures compatibility with the @code{media9} and
 @code{animate} packages.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-ocgx2 texlive-ocgx2)
 
 (define-public texlive-optex
   (package
@@ -72168,8 +71832,6 @@ hyperlinks, ...) with Unicode fonts.")
 Schroder; the collection comprises: @code{count1to}, make use of TeX counters;
 and @code{multitoc}, typeset the table of contents in multiple columns.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-ms texlive-ms)
 
 (define-public texlive-ncctools
   (package
@@ -72285,8 +71947,6 @@ digits.  The package supports an automatic, language-dependent change of the
 number format.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-latex-numprint texlive-numprint)
-
 (define-public texlive-needspace
   (package
     (name "texlive-needspace")
@@ -72315,8 +71975,6 @@ number format.")
 vertical space.  If there is not enough space between the command and the
 bottom of the page, a new page will be started.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-needspace texlive-needspace)
 
 (define-public texlive-changepage
   (package
@@ -72349,8 +72007,6 @@ interface it shares.  This package will eventually replace the @code{chngpage}
 package, which is distributed with the package.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-changepage texlive-changepage)
-
 (define-public texlive-eukdate
   (package
     (name "texlive-eukdate")
@@ -72377,8 +72033,6 @@ which is preferred in many parts of the world, as distinct from that which is
 used in @code{\\maketitle} of the article class, @samp{June 26, 2008}, the US
 format.")
     (license license:lppl)))
-
-(define-deprecated-package texlive-latex-eukdate texlive-eukdate)
 
 (define-public texlive-euler
   (package
@@ -72591,8 +72245,6 @@ output.")
     ;; documentation is also dual-license: LPPL-1.3c+ or GFDL-1.2.
     (license (list license:gpl2 license:lppl1.3c+ license:fdl1.2+))))
 
-(define-deprecated-package texlive-latex-pgf texlive-pgf)
-
 (define-public texlive-piton
   (package
     (name "texlive-piton")
@@ -72787,8 +72439,6 @@ only the current date but also the name of the day, and a package
 not only with KOMA-Script classes but also with the standard classes.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-koma-script texlive-koma-script)
-
 (define-public texlive-koma-script-examples
   (package
     (name "texlive-koma-script-examples")
@@ -72844,8 +72494,6 @@ It makes use of e-TeX’s facilities if they are available.  The package may
 be used either with LaTeX or with plain TeX.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-generic-atbegshi texlive-atbegshi)
-
 (define-public texlive-bigintcalc
   (package
     (name "texlive-bigintcalc")
@@ -72870,8 +72518,6 @@ be used either with LaTeX or with plain TeX.")
      "This package provides expandable arithmetic operations with big integers
 that can exceed TeX's number limits.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-generic-bigintcalc texlive-bigintcalc)
 
 (define-public texlive-bitset
   (package
@@ -72899,8 +72545,6 @@ bits.  The size of the vector may grow dynamically.  Individual bits can be
 manipulated.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-generic-bitset texlive-bitset)
-
 (define-public texlive-etexcmds
   (package
     (name "texlive-etexcmds")
@@ -72926,8 +72570,6 @@ collide with existing macros.  This package solves the name clashes by adding
 a prefix to e-TeX’s commands.  For example, ε-TeX’s @code{\\unexpanded} is
 provided as @code{\\etex@@unexpanded}.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-generic-etexcmds texlive-etexcmds)
 
 (define-public texlive-etextools
   (package
@@ -72983,8 +72625,6 @@ modifiers; some purely expandable numerics.")
 strings.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-generic-gettitlestring texlive-gettitlestring)
-
 (define-public texlive-infwarerr
   (package
     (name "texlive-infwarerr")
@@ -73012,8 +72652,6 @@ corresponding LaTeX commands; under Plain TeX they are available as complete
 implementations.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-generic-infwarerr texlive-infwarerr)
-
 (define-public texlive-intcalc
   (package
     (name "texlive-intcalc")
@@ -73037,8 +72675,6 @@ implementations.")
      "This package provides expandable arithmetic operations with integers,
 using the e-TeX extension @code{\\numexpr} if it is available.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-generic-intcalc texlive-intcalc)
 
 (define-public texlive-kvdefinekeys
   (package
@@ -73064,8 +72700,6 @@ using the e-TeX extension @code{\\numexpr} if it is available.")
      "This package provides the @code{\\kv@@define@@key} (analogous to
 keyval’s @code{\\define@@key}, to define keys for use by @code{kvsetkeys}.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-generic-kvdefinekeys texlive-kvdefinekeys)
 
 (define-public texlive-kvsetkeys
   (package
@@ -73094,8 +72728,6 @@ unknown options.  Active commas and equal signs may be used, and only one
 level of curly braces are removed from the values.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-generic-kvsetkeys texlive-kvsetkeys)
-
 (define-public texlive-listofitems
   (package
     (name "texlive-listofitems")
@@ -73120,8 +72752,6 @@ level of curly braces are removed from the values.")
 has been selected by the user, and to access any of these items with a simple
 interface.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-generic-listofitems texlive-listofitems)
 
 (define-public texlive-ltxcmds
   (package
@@ -73148,8 +72778,6 @@ interface.")
 a separate namespace and also makes them available for other formats such as
 plain TeX.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-generic-ltxcmds texlive-ltxcmds)
 
 (define-public texlive-ltxmisc
   (package
@@ -73208,8 +72836,6 @@ plain TeX.")
 using TeX or e-TeX.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-generic-pdfescape texlive-pdfescape)
-
 (define-public texlive-uniquecounter
   (package
     (name "texlive-uniquecounter")
@@ -73236,8 +72862,6 @@ Several counters can be created with different names.  The numeric values are
 not limited.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-generic-uniquecounter texlive-uniquecounter)
-
 (define-public texlive-readarray
   (package
     (name "texlive-readarray")
@@ -73262,8 +72886,6 @@ a 2-D or 3-D array and to recall that data at will by individual cell number.
 The data can be but need not be numerical in nature.  It can be, for example,
 formatted text.")
     (license license:lppl1.3)))
-
-(define-deprecated-package texlive-latex-readarray texlive-readarray)
 
 (define-public texlive-verbatimbox
   (package
@@ -73292,8 +72914,6 @@ a replica of the @code{boxedverbatim} environment itself).  A valuable use is
 in places where the standard @code{verbatim} environment (which is based on a
 @code{trivlist}) may not appear.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-verbatimbox texlive-verbatimbox)
 
 (define-public texlive-verifica
   (package
@@ -73378,8 +72998,6 @@ such as footnotes and section titles.")
     ;; No version of the GPL is specified.
     (license license:gpl3+)))
 
-(define-deprecated-package texlive-latex-examplep texlive-examplep)
-
 (define-public texlive-xunicode
   (package
     (name "texlive-xunicode")
@@ -73443,10 +73061,6 @@ diagrams with TeX.  Xy-pic works with most formats (including LaTeX,
 AMS-LaTeX, AMS-TeX, and plain TeX).  The distribution includes Michael Barr's
 @code{diag} package, which was previously distributed stand-alone.")
     (license license:gpl3+)))
-
-(define-deprecated-package texlive-fonts-xypic texlive-xypic)
-
-(define-deprecated-package texlive-generic-xypic texlive-xypic)
 
 (define-public texlive-xypic-tut-pt
   (package
@@ -73585,8 +73199,6 @@ Support for use with LaTeX is available in @code{freenfss}, part of
 @command{psnfss}.")
     (license (license:non-copyleft
               "http://mirrors.ctan.org/fonts/charter/readme.charter"))))
-
-(define-deprecated-package texlive-fonts-charter texlive-charter)
 
 (define-public texlive-chngcntr
   (package
@@ -73850,8 +73462,6 @@ for a wealth of support information.")
     (license (list license:lppl1.3c+
                    license:gpl2+
                    license:cc-by-sa4.0))))
-
-(define-deprecated-package texlive-context-base texlive-context)
 
 (define-public texlive-context-calendar-examples
   (package
@@ -74469,8 +74079,6 @@ effects, varying slide transitions and animations.")
     ;; dual-licensed under either FDLv1.3+ or LPPL1.3c+.
     (license (list license:lppl1.3c+ license:gpl2+ license:fdl1.3+))))
 
-(define-deprecated-package texlive-latex-beamer texlive-beamer)
-
 (define-public texlive-beamer-tut-pt
   (package
     (name "texlive-beamer-tut-pt")
@@ -74520,8 +74128,6 @@ the metadata is stored in an XML file, and this XML stream is then embedded in
 the file to which it applies.")
     (license license:gpl3+)))
 
-(define-deprecated-package texlive-latex-xmpincl texlive-xmpincl)
-
 (define-public texlive-pdfx
   (package
     (name "texlive-pdfx")
@@ -74553,8 +74159,6 @@ the file to which it applies.")
      "The package helps LaTeX users to create PDF/X, PFD/A and other
 standards-compliant PDF documents with pdfTeX, LuaTeX and XeTeX.")
     (license license:lppl1.2+)))
-
-(define-deprecated-package texlive-latex-pdfx texlive-pdfx)
 
 (define-public texlive-yamlvars
   (package
@@ -77585,8 +77189,6 @@ macros it defines for keys, and to define families of key definitions; these
 all help use in documents where several packages define their own sets of
 keys.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-xkeyval texlive-xkeyval)
 
 (define-public texlive-scikgtex
   (package
@@ -86680,8 +86282,6 @@ an arbitrary point.  Various options allow complete control over spacing,
 styles of inference rules, placement of labels, etc.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-ebproof texlive-ebproof)
-
 (define-public texlive-bussproofs
   (package
     (name "texlive-bussproofs")
@@ -86705,8 +86305,6 @@ styles of inference rules, placement of labels, etc.")
      "This package provides commands to typeset proof trees in the style of
 sequent calculus and related systems.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-bussproofs texlive-bussproofs)
 
 (define-public texlive-euenc
   (package
@@ -87091,8 +86689,6 @@ Danish and Portuguese from babel or polyglossia if either is in use in the
 document.")
     (license license:lppl1.3c+)))
 
-(define-deprecated-package texlive-latex-translations texlive-translations)
-
 (define-public texlive-translator
   (package
     (name "texlive-translator")
@@ -87172,8 +86768,6 @@ absolute positions on the LaTeX page.  There are several reasons why this
 might be useful, an important one being to help the creation of large-format
 conference posters.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-textpos texlive-textpos)
 
 (define-public texlive-udesoftec
   (package
@@ -89374,8 +88968,6 @@ Norwegian in Babel.  Some shortcuts are defined, as well as translations to
 Norsk of standard LaTeX names.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-generic-babel-norsk texlive-babel-norsk)
-
 (define-public texlive-babel-danish
   (package
     (name "texlive-babel-danish")
@@ -90561,8 +90153,6 @@ underscores), and hyphenation of text typeset in monospaced (e.g.,
 @code{cmtt}) fonts.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-hyphenat texlive-hyphenat)
-
 (define-public texlive-lastpage
   (package
     (name "texlive-lastpage")
@@ -90588,8 +90178,6 @@ through the introduction of a new label which can be referenced like
 @code{\\pageref{LastPage}} to give a reference to the last page of a document.
 It is particularly useful in the page footer that says: @samp{Page N of M}.")
     (license license:lppl1.3+)))
-
-(define-deprecated-package texlive-latex-lastpage texlive-lastpage)
 
 (define-public texlive-layaureo
   (package
@@ -90646,8 +90234,6 @@ which the command @code{\\tab} advances typesetting position to the next
 defined tab stop.")
     (license license:lppl1.3+)))
 
-(define-deprecated-package texlive-latex-tabto-ltx texlive-tabto-ltx)
-
 (define-public texlive-soul
   (package
     (name "texlive-soul")
@@ -90676,9 +90262,6 @@ syllable.  This version is a merge of the original @code{soul} package and the
 @code{soulutf8} package and supports also UTF-8.")
     (license license:lppl)))
 
-(define-deprecated-package texlive-generic-soul texlive-soul)
-(define-deprecated-package texlive-soulutf8 texlive-soul)
-
 (define-public texlive-xstring
   (package
     (name "texlive-xstring")
@@ -90705,8 +90288,6 @@ recurrences of, a substring.  The package works equally in Plain TeX and
 LaTeX (though e-TeX is always required).  The strings to be processed may
 contain (expandable) macros.")
     (license license:lppl1.3c)))
-
-(define-deprecated texlive-generic-xstring texlive-xstring)
 
 (define-public texlive-substr
   (package
@@ -90758,8 +90339,6 @@ of occurrences of a substring.")
 interest.  Since most such counters are simply incremented when they are
 changed, the recorded value will usually be the maximum value.")
     (license license:lppl1.3c+)))
-
-(define-deprecated-package texlive-latex-totcount texlive-totcount)
 
 (define-public texlive-totpages
   (package
