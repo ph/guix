@@ -5524,7 +5524,7 @@ includes LV2 plugins and a JACK standalone client.")
            qtnetworkauth-5
            qtquickcontrols-5
            qtquickcontrols2-5
-           qtscript
+           qtscript-5
            qtsvg-5
            qtx11extras
            qtxmlpatterns))
