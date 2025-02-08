@@ -2708,7 +2708,7 @@ voice formats.")
            qtbase-5
            qtcharts-5
            qtdeclarative-5
-           qtgamepad
+           qtgamepad-5
            qtgraphicaleffects
            qtlocation-5
            qtmultimedia-5
@@ -2897,9 +2897,7 @@ software-defined radio receivers.")
            portaudio
            pulseaudio
            qcustomplot
-           ;; TODO: Needs to be renamed to qtgamepad-5 when version 6 is
-           ;; packed.
-           qtgamepad
+           qtgamepad-5
            qtbase-5
            qtmultimedia-5
            qtserialport-5
