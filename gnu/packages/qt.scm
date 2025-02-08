@@ -2328,7 +2328,7 @@ between the host (QML/C++ application) and the client (HTML/JavaScript
 application).")
     (license (package-license qtbase))))
 
-(define-public qtwebglplugin
+(define-public qtwebglplugin-5
   (package
     (inherit qtsvg-5)
     (name "qtwebglplugin")
