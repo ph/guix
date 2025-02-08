@@ -1037,7 +1037,7 @@ settings (aliasing, linear interpolation and cubic interpolation).")
            pulseaudio
            qtbase-5
            qtsvg-5
-           qtxmlpatterns
+           qtxmlpatterns-5
            zlib))
     (home-page "http://hydrogen-music.org/")
     (synopsis "Drum machine")
@@ -5527,7 +5527,7 @@ includes LV2 plugins and a JACK standalone client.")
            qtscript-5
            qtsvg-5
            qtx11extras
-           qtxmlpatterns))
+           qtxmlpatterns-5))
     (propagated-inputs
      (list `(,alsa-plugins "pulseaudio"))) ;for libasound_module_conf_pulse.so
     (synopsis "Music composition and notation software")
