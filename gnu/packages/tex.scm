@@ -326,12 +326,9 @@ should not be installed in a profile.")
                 (("^TEXMFROOT = .*") "TEXMFROOT = {$GUIX_TEXMF}/..\n")
                 (("^TEXMFDIST = .*") "TEXMFDIST = {$GUIX_TEXMF}\n")
                 ;; "ls-R" files are to be expected only in the TEXMFDIST
-                ;; directories.  However, those are not always present, e.g.,
-                ;; when building a package with `texlive-build-system' or when
-                ;; generating a profile.  Since both situations need to be
-                ;; handled, drop the "!!" prefixes.
+                ;; directories.
                 (("^TEXMF = .*")
-                 "TEXMF = {$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFSYSCONFIG,$TEXMFSYSVAR,$TEXMFDIST}\n")
+                 "TEXMF = {$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFSYSCONFIG,$TEXMFSYSVAR,!!$TEXMFDIST}\n")
                 (("^TEXMFDBS = .*") "TEXMFDBS = {$TEXMFDIST}\n")
                 ;; Ignore system-wide cache, which is not writable.  Use local
                 ;; one instead, i.e. "$HOME/.texliveYYYY/texmf-var/".
