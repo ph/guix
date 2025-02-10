@@ -706,15 +706,14 @@ of user-specified directories similar to how shells look up executables.")
                      (string-append "File.join(\"" ptex "\"")))
                   (invoke "ruby" "generate-ptex-patterns.rb"))))))))
     (native-inputs
-     ;; TODO: Remove input labels on next rebuild cycle.
-     `(("ruby" ,ruby-2.7)
-       ("ruby-hydra-minimal" ,ruby-hydra-minimal/pinned)
-       ;; Build phase requires "docstrip.tex" from TEXLIVE-LATEX.
-       ;; However, adding this package to native inputs would initiate
-       ;; a circular dependency.  To work around this, use TEXLIVE-LATEX
-       ;; source, then add "docstrip.tex" to TEXINPUTS before build.
-       ("_" ,(package-source texlive-latex))
-       ("texlive-tex" ,texlive-tex)))
+     (list ruby-2.7
+           ruby-hydra-minimal/pinned
+           ;; Build phase requires "docstrip.tex" from TEXLIVE-LATEX.
+           ;; However, adding this package to native inputs would initiate
+           ;; a circular dependency.  To work around this, use TEXLIVE-LATEX
+           ;; source, then add "docstrip.tex" to TEXINPUTS before build.
+           (package-source texlive-latex)
+           texlive-tex))
     (home-page "https://ctan.org/pkg/hyph-utf8")
     (synopsis "Hyphenation patterns expressed in UTF-8")
     (description
