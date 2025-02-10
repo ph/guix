@@ -64869,9 +64869,7 @@ Unicode option of @code{inputenc} or @code{inputenx}, or by XeLaTeX/LuaLaTeX.")
                                                "tex/generic/ydoc/ydocstrip.tex")
                             "build/")
               (setenv "TEXINPUTS" (string-append (getcwd) "/build:")))))))
-    (native-inputs
-     ;; TODO: Remove input label on next rebuild cycle.
-     `(("_" ,(package-source texlive-ydoc))))
+    (native-inputs (list (package-source texlive-ydoc)))
     (home-page "https://ctan.org/pkg/newverbs")
     (synopsis "Define new versions of @code{\\verb}")
     (description
