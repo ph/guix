@@ -15,7 +15,7 @@
 ;;; Copyright © 2020 Vincent Legoll <vincent.legoll@gmail.com>
 ;;; Copyright © 2020, 2021 Paul Garlick <pgarlick@tourbillion-technology.com>
 ;;; Copyright © 2021, 2022 Maxim Cournoyer <maxim.cournoyer@gmail.com>
-;;; Copyright © 2021-2024 Nicolas Goaziou <mail@nicolasgoaziou.fr>
+;;; Copyright © 2021-2025 Nicolas Goaziou <mail@nicolasgoaziou.fr>
 ;;; Copyright © 2021 Leo Le Bouter <lle-bout@zaclys.net>
 ;;; Copyright © 2021 Xinglu Chen <public@yoctocell.xyz>
 ;;; Copyright © 2021 Ivan Gankevich <i.gankevich@spbu.ru>
@@ -1297,57 +1297,102 @@ documentation in the TeX format."
         (build-system copy-build-system)
         (arguments
          (list
+          #:imported-modules `(,@%copy-build-system-modules
+                               (guix build union))
           #:modules '((guix build copy-build-system)
+                      (guix build union)
                       (guix build utils)
+                      (ice-9 match)
                       (ice-9 popen)
-                      (ice-9 textual-ports))
+                      (ice-9 textual-ports)
+                      (srfi srfi-1))
           #:install-plan
-          #~'(("texmf-dist/web2c/updmap.cfg" "share/texmf-config/web2c/")
-              ("texmf-dist/web2c/mktex.cnf"  "share/texmf-config/web2c/")
-              ("texmf-dist/web2c/map"        "share/texmf-dist/fonts/map"))
+          #~'(("texmf-dist/web2c/updmap.cfg" "share/texmf-dist/web2c/"))
           #:phases
           #~(modify-phases %standard-phases
-              (add-after 'unpack 'generate-mktex.cnf
-                ;; When building a package, mktex programs try to create files
-                ;; in TEXMFVAR, which is unavailable.  Force creating those
-                ;; files in the working directory instead.
-                (lambda _
-                  (with-directory-excursion "texmf-dist/web2c"
-                    (with-output-to-file "mktex.cnf"
-                      (lambda _ (display ": ${MT_DESTROOT=''}"))))))
+              (add-before 'unpack 'initialize-tree
+                (lambda* (#:key inputs #:allow-other-keys)
+                  ;; Build complete TeX Live tree in #$output, barring the
+                  ;; files going to be regenerated.
+                  (let ((texlive-outputs
+                         (filter-map
+                          (match-lambda
+                            (`(,label . ,dir)
+                             (and (string-prefix? "texlive-" label)
+                                  dir)))
+                          inputs)))
+                    (union-build #$output texlive-outputs
+                                 #:create-all-directories? #t
+                                 #:log-port (%make-void-port "w")))
+                  ;; Remove files that are going to be regenerated.
+                  (with-directory-excursion
+                      (string-append #$output "/share/texmf-dist")
+                    (for-each (lambda (file)
+                                (when (file-exists? file) (delete-file file)))
+                              (list "fonts/map/dvipdfmx/updmap/kanjix.map"
+                                    "fonts/map/dvips/updmap/builtin35.map"
+                                    "fonts/map/dvips/updmap/download35.map"
+                                    "fonts/map/dvips/updmap/ps2pk.map"
+                                    "fonts/map/dvips/updmap/psfonts.map"
+                                    "fonts/map/dvips/updmap/psfonts_pk.map"
+                                    "fonts/map/dvips/updmap/psfonts_t1.map"
+                                    "fonts/map/pdftex/updmap/pdftex.map"
+                                    "fonts/map/pdftex/updmap/pdftex_dl14.map"
+                                    "fonts/map/pdftex/updmap/pdftex_ndl14.map"
+                                    "web2c/updmap.cfg")))))
               (add-before 'install 'regenerate-updmap.cfg
                 (lambda _
-                  (with-directory-excursion "texmf-dist/web2c"
-                    (make-file-writable "updmap.cfg")
+                  ;; Set TEXMFSYSVAR to a sane and writable value; updmap
+                  ;; fails if it cannot create its log file.
+                  (setenv "TEXMFSYSVAR" (getcwd))
+                  ;; Limit scope of TEXMF to the current tree, and skip ls-R
+                  ;; database usage since it has not been generated yet.
+                  (setenv "TEXMF" "{$TEXMFSYSVAR,$TEXMFDIST}")
 
+                  (with-directory-excursion "texmf-dist/web2c"
                     ;; Disable unavailable map files.
-                    (let* ((port (open-pipe* OPEN_WRITE "updmap-sys"
-                                             "--syncwithtrees"
-                                             "--nohash"
-                                             "--cnffile" "updmap.cfg")))
+                    (let ((port (open-pipe* OPEN_WRITE "updmap-sys"
+                                            "--syncwithtrees"
+                                            "--nohash"
+                                            "--cnffile" "updmap.cfg")))
                       (display "Y\n" port)
                       (when (not (zero? (status:exit-val (close-pipe port))))
                         (error "failed to filter updmap.cfg")))
-
-                    ;; Set TEXMFSYSVAR to a sane and writable value; updmap
-                    ;; fails if it cannot create its log file.
-                    (setenv "TEXMFSYSVAR" (getcwd))
-
                     ;; Generate maps.
-                    (invoke "updmap-sys"
-                            "--cnffile"           "updmap.cfg"
-                            "--dvipdfmxoutputdir" "map/dvipdfmx/updmap/"
-                            "--dvipsoutputdir"    "map/dvips/updmap/"
-                            "--pdftexoutputdir"   "map/pdftex/updmap/")))))))
+                    (let ((root (string-append #$output
+                                               "/share/texmf-dist/fonts/map/")))
+                      (invoke "updmap-sys"
+                              "--cnffile" "updmap.cfg"
+                              "--dvipdfmxoutputdir"
+                              (string-append root "dvipdfmx/updmap/")
+                              "--dvipsoutputdir"
+                              (string-append root "dvips/updmap/")
+                              "--pdftexoutputdir"
+                              (string-append root "pdftex/updmap/"))))))
+              (add-after 'regenerate-updmap.cfg 'regenerate-ls-R
+                (lambda _
+                  ;; Generate ls-R database for local tree.  Unfortunately,
+                  ;; "mktexlsr" doesn't preserve alphabetic order, probably
+                  ;; because it is used on symlinks.  Use a lower level
+                  ;; equivalent of that command.
+                  (with-directory-excursion
+                      (string-append #$output "/share/texmf-dist")
+                    (with-output-to-file "ls-R"
+                      (lambda ()
+                        (invoke "ls" "-1LAR" "./")))))))))
         (native-inputs (list texlive-scripts))
-        (propagated-inputs (map (lambda (package)
-                                  (list (package-name package) package))
-                                (append default-packages packages)))
+        (inputs (map (lambda (package)
+                       (list (package-name package) package))
+                     (append default-packages packages)))
+        ;; Propagate libkpathsea in order to populate GUIX_TEXMF when
+        ;; building the package using this one as an input.
+        (propagated-inputs (list texlive-libkpathsea))
         (home-page (package-home-page texlive-bin))
-        (synopsis "TeX Live fonts map configuration")
-        (description "This package contains the fonts map configuration file
-generated for the base TeX Live packages as well as, optionally, user-provided
-ones.")
+        (synopsis "TeX Live autonomous tree")
+        (description
+         "This package contains an autonomous TeX Live consisting of base
+packages as well as, optionally, user-provided ones.  It is meant to be added
+as a package native input, in order to build TeX documentation.")
         (license (delete-duplicates
                   (fold (lambda (package result)
                           (match (package-license package)
@@ -67408,13 +67453,13 @@ with traditional TeX as well as with Unicode aware variants.")
                       (string-append (getcwd) ":"
                                      (getenv "GUIX_TEXMF"))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
-            (list font-dejavu
-                  font-gnu-freefont
-                  font-linuxlibertine
-                  font-sil-ezra
-                  fontconfig
-                  texlive-amiri
+     (list font-dejavu
+           font-gnu-freefont
+           font-linuxlibertine
+           font-sil-ezra
+           fontconfig
+           (texlive-updmap.cfg
+            (list texlive-amiri
                   texlive-babel
                   texlive-bidi
                   texlive-booktabs
@@ -78422,10 +78467,10 @@ the @code{psnfss} distribution.")
                 (("(set(main|mono|sans)font(\\[.*?])?\\{)[^}]+}" _ prefix)
                  (string-append prefix "FreeSans}"))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
-            (list fontconfig
-                  font-gnu-freefont
-                  texlive-amsmath
+     (list font-gnu-freefont
+           fontconfig
+           (texlive-updmap.cfg
+            (list texlive-amsmath
                   texlive-amsfonts
                   texlive-bidi
                   texlive-etoolbox
