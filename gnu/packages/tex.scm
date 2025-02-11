@@ -69,6 +69,7 @@
   #:use-module (gnu packages autotools)
   #:use-module (gnu packages bash)
   #:use-module (gnu packages boost)
+  #:use-module (gnu packages check)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages cpp)
   #:use-module (gnu packages digest)
@@ -99,6 +100,7 @@
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages shells)
   #:use-module (gnu packages tcl)
+  #:use-module (gnu packages time)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages base)
   #:use-module (gnu packages gawk)
@@ -2440,6 +2442,7 @@ number styles are available.")
     (outputs '("out" "doc"))
     (build-system texlive-build-system)
     (arguments (list #:create-formats #~(list "aleph")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-aleph-bin
            texlive-cm
@@ -3072,6 +3075,7 @@ create a bibliography.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink pdftex "amstex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-amsfonts
            texlive-cm
@@ -15744,6 +15748,7 @@ Cosmetica font, which is a similar design to Optima and includes Greek.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink pdftex "eplain"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -20477,6 +20482,7 @@ Indian Type Foundry, with support for LaTeX and pdfLaTeX.")
     (outputs '("out" "doc"))
     (build-system texlive-build-system)
     (arguments (list #:create-formats #~(list "hilatex" "hitex")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -24728,6 +24734,7 @@ symbol variants more suited to work in logic.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink tex "lollipop"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs (list texlive-cm texlive-hyphen-base texlive-tex))
     (home-page "https://ctan.org/pkg/lollipop")
     (synopsis "TeX made easy")
@@ -26771,6 +26778,7 @@ with symbols, giving automatic alignment.")
                        (symlink pdftex "mex")
                        (symlink pdftex "pdfmex")
                        (symlink pdftex "utf8mex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-enctex
            texlive-hyphen-complete
@@ -27152,6 +27160,7 @@ avoids the spindliness of most other Type 1 versions of Computer Modern.")
                      (with-directory-excursion bin
                        (symlink pdftex "mllatex")
                        (symlink pdftex "mltex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -36501,6 +36510,7 @@ produces.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink pdftex "texsis"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-hyphen-base
@@ -45094,6 +45104,7 @@ LaTeX packages use of @samp{@@@@}) in nested package files.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink euptex "platex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -45357,6 +45368,7 @@ their specific needs.")
     (outputs '("out" "doc"))
     (build-system texlive-build-system)
     (arguments (list #:create-formats #~(list "eptex" "ptex")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
@@ -46214,6 +46226,7 @@ of the fonts used in printers shops in Lispia.")
     (arguments
      (list #:texlive-latex-bin? #f
            #:create-formats #~(list "tex")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-hyphen-base
@@ -46480,6 +46493,7 @@ barcodes.")
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink euptex "uplatex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -46550,6 +46564,7 @@ and e-upTeX.")
     (outputs '("out" "doc"))
     (build-system texlive-build-system)
     (arguments (list #:create-formats #~(list "euptex" "uptex")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
@@ -48514,6 +48529,7 @@ environments and another with all extracted environments converted to
            #~(and (not #$(or (target-ppc64le?)
                              (target-riscv64?)))
                   (list "luajithbtex" "luajittex"))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
@@ -48630,6 +48646,7 @@ clearly show any mismatches.")
                 "0ngbhdh8hgpjfqnrjlnp27x3qziks3yf2zp1qq7r4bjfa5jx9gr6"))))
     (build-system texlive-build-system)
     (arguments (list #:create-formats #~(list "mflua")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs (list texlive-luatex texlive-metafont texlive-mflua-bin))
     (home-page "https://ctan.org/pkg/mflua")
     (synopsis "Configuration and base files for MFLua")
@@ -49698,6 +49715,7 @@ information in the TFM file.")
               (let ((perl (search-input-file inputs "/bin/perl")))
                 (substitute* "scripts/context/perl/mptopdf.pl"
                   (("exec perl") (string-append "exec " perl)))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (inputs (list perl))
     (propagated-inputs (list texlive-pdftex texlive-plain))
     (home-page "https://ctan.org/pkg/mptopdf")
@@ -50303,6 +50321,7 @@ see the structure of a document by looking at the source file of the manual.")
               (substitute* "source/cslatex/base/cslatex.ins"
                 (("\\keepsilent\n" all)
                  (string-append all "\\askforoverwritefalse\n"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-atbegshi
            texlive-atveryend
@@ -58204,6 +58223,7 @@ formats.")
                   (symlink pdftex "latex")
                   (symlink luahbtex "lualatex")
                   (symlink pdftex "pdflatex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -59187,6 +59207,7 @@ and @code{pdfxmltex}.")
                 (mkdir-p (string-append #$output "/bin"))
                 (symlink pdftex (string-append #$output "/bin/xmltex"))
                 (symlink pdftex (string-append #$output "/bin/pdfxmltex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
@@ -60643,7 +60664,9 @@ in the same way as BSD/GNU @code{getopt_long(3)} functions do.")
                  "TEXMFSYSCONFIG = \"$TEXMFDIST/../texmf-config\",\n")
                 (("TEXMF *=.*")
                  "TEXMF = \"{$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFSYSCONFIG,$TEXMFSYSVAR,$TEXMFDIST}\",\n")))))))
-    (native-inputs (list texlive-kpathsea))
+    (native-inputs
+     (list (if (target-64bit?) libfaketime datefudge)
+           texlive-kpathsea))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
@@ -60767,7 +60790,9 @@ Either of the Plain and LaTeX2e formats may be used with the package.")
      (list
       #:texlive-latex-bin? #f
       #:create-formats #~(list "luahbtex")))
-    (native-inputs (list texlive-kpathsea))
+    (native-inputs
+     (list texlive-kpathsea
+           (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-etex
@@ -61525,7 +61550,9 @@ available.")
                        (symlink pdftex "csplain")
                        (symlink pdftex "pdfcsplain")
                        (symlink luatex "luacsplain"))))))))
-    (native-inputs (list texlive-xetex))
+    (native-inputs
+     (list texlive-xetex
+           (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-cm
            texlive-cs
@@ -70377,6 +70404,7 @@ of ink traps which typify the Kurier font.")
                 (with-directory-excursion bin
                   (symlink pdftex "jadetex")
                   (symlink pdftex "pdfjadetex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-amsfonts
            texlive-auxhook
@@ -71297,6 +71325,7 @@ e-TeX.")
                       (string-append prefix
                                      #$(this-package-input "ghostscript")
                                      "/bin\"\n"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (inputs (list ghostscript))
     (propagated-inputs
      (list texlive-cm
@@ -71829,6 +71858,7 @@ and back-ends.  It also ensures compatibility with the @code{media9} and
                      (mkdir-p bin)
                      (with-directory-excursion bin
                        (symlink luatex "optex"))))))))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-amsfonts
            texlive-cm
@@ -73593,6 +73623,7 @@ to make the correct sequence of sections of a book block visible.")
      (list
       #:link-scripts #~(list "texexec.rb" "texmfstart.rb")
       #:create-formats #~(list "cont-en")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (inputs (list ruby))
     (propagated-inputs (list texlive-context texlive-metapost texlive-mptopdf
                              texlive-pdftex texlive-xetex))
@@ -89831,7 +89862,8 @@ compatibility reasons.")
             (lambda _
               (delete-file-recursively "web2c"))))))
     (native-inputs
-     (list texlive-firstaid
+     (list (if (target-64bit?) libfaketime datefudge)
+           texlive-firstaid
            texlive-l3kernel
            texlive-l3packages
            texlive-latex
@@ -90533,6 +90565,7 @@ that it will build with web2c out of the box.")
     (arguments
      (list #:link-scripts #~(list "xelatex-unsafe.sh" "xetex-unsafe.sh")
            #:create-formats #~(list "xelatex" "xetex")))
+    (native-inputs (list (if (target-64bit?) libfaketime datefudge)))
     (propagated-inputs
      (list texlive-babel
            texlive-cm
