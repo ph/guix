@@ -7291,7 +7291,7 @@ data and settings.")
     (inputs
      (list boost cairo rmath-standalone))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-doi
                   texlive-etoolbox
                   texlive-examplep
@@ -15894,7 +15894,7 @@ programs for inferring phylogenies (evolutionary trees).")
      (list automake
            autoconf
            openmpi
-           (texlive-updmap.cfg
+           (texlive-local-tree
             (list texlive-caption
                   texlive-cite
                   texlive-fancyvrb
@@ -21049,7 +21049,7 @@ to an artifact/contaminant file.")
     (inputs
      (list openmpi zlib))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-infwarerr
                   texlive-kvoptions
                   texlive-pdftexcmds))))

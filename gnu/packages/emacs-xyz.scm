@@ -14,7 +14,7 @@
 ;;; Copyright © 2016, 2017 Roel Janssen <roel@gnu.org>
 ;;; Copyright © 2016, 2017 Nikita <nikita@n0.is>
 ;;; Copyright © 2016, 2019 Alex Griffin <a@ajgrf.com>
-;;; Copyright © 2016-2024 Nicolas Goaziou <mail@nicolasgoaziou.fr>
+;;; Copyright © 2016-2025 Nicolas Goaziou <mail@nicolasgoaziou.fr>
 ;;; Copyright © 2016, 2017, 2018 Alex Vong <alexvong1995@gmail.com>
 ;;; Copyright © 2016-2022, 2024 Arun Isaac <arunisaac@systemreboot.net>
 ;;; Copyright © 2017 Christopher Baines <mail@cbaines.net>
@@ -4983,7 +4983,7 @@ as a library for other Emacs packages.")
                   (invoke "pdftex" "tex-ref")
                   (install-file "tex-ref.pdf" doc-dir))))))))
     (native-inputs
-     (list perl (texlive-updmap.cfg)))
+     (list perl (texlive-local-tree)))
     (inputs
      (list ghostscript))
     (home-page "https://www.gnu.org/software/auctex/")

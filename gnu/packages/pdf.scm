@@ -17,7 +17,7 @@
 ;;; Copyright © 2019 Alex Griffin <a@ajgrf.com>
 ;;; Copyright © 2019 Ben Sturmfels <ben@sturm.com.au>
 ;;; Copyright © 2019,2020 Hartmut Goebel <h.goebel@crazy-compilers.com>
-;;; Copyright © 2020-2024 Nicolas Goaziou <mail@nicolasgoaziou.fr>
+;;; Copyright © 2020-2025 Nicolas Goaziou <mail@nicolasgoaziou.fr>
 ;;; Copyright © 2020, 2022 Michael Rohleder <mike@rohleder.de>
 ;;; Copyright © 2020, 2024 Timotej Lazar <timotej.lazar@araneo.si>
 ;;; Copyright © 2020, 2022, 2023, 2024 Maxim Cournoyer <maxim.cournoyer@gmail.com>
@@ -213,7 +213,7 @@ comparison modes: words, characters, and appearance.")
            gettext-minimal
            ghostscript
            pkg-config
-           (texlive-updmap.cfg)))
+           (texlive-local-tree)))
     (inputs
      (list poppler))
     (home-page "https://github.com/trueroad/extractpdfmark")
