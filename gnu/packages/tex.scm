@@ -766,6 +766,7 @@ of user-specified directories similar to how shells look up executables.")
                      (string-append "File.join(\"" ptex "\"")))
                   (invoke "ruby" "generate-ptex-patterns.rb"))))))))
     (native-inputs
+     ;; TODO: Update to ruby@3 on next rebuild-cycle.
      (list ruby-2.7
            ruby-hydra-minimal/pinned
            ;; Build phase requires "docstrip.tex" from TEXLIVE-LATEX.
