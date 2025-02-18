@@ -1036,7 +1036,7 @@ mailpack.  What can alterMIME do?
            gnupg
            ninja
            pkg-config
-           ronn
+           ronn-ng
            w3m
            xorg-server-for-tests))
     (inputs
