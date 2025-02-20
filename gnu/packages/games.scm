@@ -7071,32 +7071,33 @@ for Un*x systems with X11.")
 
 (define-public freeciv
   (package
-   (name "freeciv")
-   (version "3.1.3")
-   (source
-    (origin
-     (method url-fetch)
-     (uri (list (string-append
-                  "https://files.freeciv.org/stable/freeciv-"
-                  version ".tar.xz")
-                (string-append
-                  "mirror://sourceforge/freeciv/Freeciv%20"
-                  (version-major+minor version) "/" version
-                  "/freeciv-" version ".tar.xz")))
-     (sha256
-      (base32 "0bvz5hqppj589w08bzrfzf5m6nwfwrzgg03lqb3p8hspjkx8c43l"))))
-   (build-system gnu-build-system)
-   (inputs
-    (list curl cyrus-sasl gtk+ sdl2-mixer sqlite zlib))
-   (native-inputs
-    (list pkg-config))
-   (home-page "https://www.freeciv.org/")
-   (synopsis "Turn-based empire building strategy game")
-   (description "Freeciv is a turn-based empire building strategy game
+    (name "freeciv")
+    (version "3.1.4")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (list (string-append
+                   "https://files.freeciv.org/stable/freeciv-"
+                   version ".tar.xz")
+                  (string-append
+                   "mirror://sourceforge/freeciv/Freeciv%20"
+                   (version-major+minor version) "/" version
+                   "/freeciv-" version ".tar.xz")))
+       (sha256
+        (base32
+         "1r4n6bqvazsn6q41xq5l86xj7rpfi4dxva6mhz17ql640fwrp68l"))))
+    (build-system gnu-build-system)
+    (inputs
+     (list curl cyrus-sasl gtk+ sdl2-mixer sqlite zlib))
+    (native-inputs
+     (list pkg-config))
+    (home-page "https://www.freeciv.org/")
+    (synopsis "Turn-based empire building strategy game")
+    (description "Freeciv is a turn-based empire building strategy game
 inspired by the history of human civilization.  The game commences in
 prehistory and your mission is to lead your tribe from the Stone Age
 into the Space Age.")
-   (license license:gpl2+)))
+    (license license:gpl2+)))
 
 (define-public no-more-secrets
   (package
