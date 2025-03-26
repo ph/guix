@@ -175,10 +175,10 @@
 ;;;                                |
 ;;;                                |
 ;;;                                `-- bin -- hyphen-complete, etc. -- latex-bin
-;;;                                     |     _____________________
-;;;  scripts --------(propagated)-------’               |
-;;;                                                     |
-;;;                                          (#:texlive-latex-bin? #f)
+;;;                                     |     __________________________________
+;;;  scripts --------(propagated)-------’                     |
+;;;                                                           |
+;;;                                               (#:texlive-latex-bin? #f)
 ;;;
 ;;;
 ;;; Default font map files and ls-R database are updated in a profile hook
@@ -198,9 +198,9 @@
 ;;; automated.  Yet, the following additional steps are required, and they can
 ;;; keep one busy for a while:
 ;;;
-;;; 1. First and foremost, run the updater:
+;;; 1. First and foremost, run the updater and log the (verbose) output:
 ;;;
-;;;      ./pre-inst-env guix refresh -t texlive -u
+;;;      ./pre-inst-env guix refresh -t texlive -u > update.log 2>&1
 ;;;
 ;;;    This takes care of updating all binaries and all TeX Live packages,
 ;;;    barring "collections" and "schemes", in a single run.
@@ -213,11 +213,24 @@
 ;;;    references to deleted packages must also be cleared from their
 ;;;    propagated inputs.
 ;;;
-;;; 3. Conversely, import newly integrated packages with, e.g.,
+;;; 3. Conversely, import newly integrated packages by refreshing all
+;;;    "collections" with, e.g.,
 ;;;
-;;;       ./pre-inst-env guix import texlive -r scheme-full
+;;;       ./pre-inst-env guix import texlive -r collection-NAME >> \
+;;;       new-packages.scm 2>&1
 ;;;
-;;;    Those must be added to their respective "collections", too.
+;;;    It is advisable to iterate the command above over the list of all their
+;;;    names:
+;;;
+;;;      basic bibtexextra binextra context fontextra fontsrecommended
+;;;      fontutils formatsextra games humanities langarabic langchinese
+;;;      langcjk langcyrillic langczechslovak langenglish langeuropean
+;;;      langfrench langgerman langgreek langitalian langjapanese langkorean
+;;;      langother langpolish langportuguese langspanish latex latexextra
+;;;      latexrecommended luatex mathscience metapost music pictures
+;;;      plaingeneric pstricks publishers xetex
+;;;
+;;;    Propagated inputs of collections must be updated accordingly.
 ;;;
 ;;; 4. Handle inputs issues.  No updater is allowed to create an input field
 ;;;    in a package if it didn't exist beforehand.  `texlive' updater is no
