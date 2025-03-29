@@ -179,13 +179,13 @@
 ;;;                                          (#:texlive-latex-bin? #f)
 ;;;
 ;;;
-;;; Default font map files are updated in a profile hook (see
-;;; `texlive-font-maps' in "profiles.scm").  However, this option is not
-;;; available when building documentation for a package.  Consequently, this
-;;; module also provides TEXLIVE-UPDMAP.CFG function, which creates a TeX Live
-;;; tree with font map files updates.  It should be used exclusively for
-;;; package definitions, as a native input.  It is possible to augment that
-;;; tree, in particular with additional font packages.
+;;; Default font map files and ls-R database are updated in a profile hook
+;;; (see `texlive-font-maps' in "profiles.scm").  However, this doesn't happen
+;;; when building documentation for a package.  Consequently, this module also
+;;; provides TEXLIVE-LOCAL-TREE function, which creates a TeX Live tree with
+;;; font map files updates and a dedicated database.  It should be used
+;;; exclusively for package definitions, as a native input.  It is possible to
+;;; augment that tree with additional TeX Live packages.
 ;;;
 ;;;
 ;;; Notes about updating TeX Live distribution:
@@ -905,7 +905,7 @@ Live collection or scheme package to their profile instead of this package.")
     (license (license:fsf-free "https://www.tug.org/texlive/copying.html"))
     (home-page "https://www.tug.org/texlive/")))
 
-;; This package must be located before `texlive-updmap.cfg' in the module.
+;; This package must be located before `texlive-local-tree' in the module.
 (define-public texlive-scheme-basic
   (package
     (name "texlive-scheme-basic")
@@ -1281,9 +1281,9 @@ teTeX distribution that was maintained by Thomas Esser.")
 
 ;; This package must be located before any package adding it to its native
 ;; inputs.
-(define-public texlive-updmap.cfg
+(define-public texlive-local-tree
   (lambda* (#:optional (packages '()))
-    "Return a 'texlive-updmap.cfg' package which contains the fonts map and
+    "Return a 'texlive-local-tree' package which contains the fonts map and
 mktex scripts configuration, along with a base set of packages plus additional
 PACKAGES.
 
@@ -1293,7 +1293,7 @@ documentation in the TeX format."
       (package
         (version (package-version texlive-source))
         (source (package-source texlive-scripts))
-        (name "texlive-updmap.cfg")
+        (name "texlive-local-tree")
         (build-system copy-build-system)
         (arguments
          (list
@@ -1402,6 +1402,8 @@ as a package native input, in order to build TeX documentation.")
                              (cons license result))))
                         '()
                         (append default-packages packages))))))))
+
+(define-deprecated/alias texlive-updmap.cfg texlive-local-tree)
 
 (define-public texlive-12many
   (package
@@ -7491,11 +7493,11 @@ manuscripts, audiovisual resources, social media and legal references.")
                (base32
                 "05fapyb6wwyv4mwjhgg3gasvqkwpwd6jxv095hird9011n6drrzm"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-biblatex
                   texlive-cochineal
                   texlive-csquotes
@@ -9117,10 +9119,10 @@ LaTeX 2.09.  Neither @code{cite} nor @code{natbib} make this mistake.")
                (base32
                 "1cyyadfvrcym4vvxl9p9zb88692m0578nqljip12xxahb4srcyb9"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
-    (native-inputs (list (texlive-updmap.cfg
+    (native-inputs (list (texlive-local-tree
                           (list texlive-etoolbox
                                 texlive-hypdoc))))
     (home-page "https://ctan.org/pkg/bropd")
@@ -17275,7 +17277,7 @@ seen as an extension to FontAwesome.")
                (base32
                 "1y061r4hadb2c26dgch6lrjw6f4j87zj1gj5lgzgx0hyyz58snqy"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "latex"
@@ -17291,7 +17293,7 @@ seen as an extension to FontAwesome.")
                      (("\\[style=philosophy-classic\\]") "")
                      (("\\\\DocInput\\{fontsize\\.dtx\\}") "")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-biblatex
                   texlive-booktabs
                   texlive-caption
@@ -31360,7 +31362,7 @@ poems, an index of first lines, and some structural commands.")
                (base32
                 "1y78zd1hd3z1901x6mc6q0mw4rgj3qcqhnjn34zix11r0gn4b2jr"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "latex"
@@ -31375,7 +31377,7 @@ poems, an index of first lines, and some structural commands.")
                      (("\\\\newcommand\\*\\\\code\\[1\\].*") "")
                      (("\\\\code\\{") "\\texttt{")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-fancyvrb
                   texlive-framed
@@ -32687,10 +32689,10 @@ both in English and Chinese with more ease and flexibility.")
                (base32
                 "1gg8qbc8ll3n6rfp3pjshbbjd30s4n3yk219y6qcmz1nv66fp1qq"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
-    (native-inputs (list (texlive-updmap.cfg)))
+    (native-inputs (list (texlive-local-tree)))
     (home-page "https://ctan.org/pkg/reverxii")
     (synopsis "Playing Reversi in TeX")
     (description
@@ -35406,14 +35408,14 @@ provides a matching math package using STIX2 letters (Roman and Greek) with
                (base32
                 "1ixxglx4azdnppiqhlkgyahj9a67zamljzv98n6hycp7y6jbd1x0"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "latex"
            ;; FIXME: I cannot build this package from source.
            #:phases #~(modify-phases %standard-phases (delete 'build))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-accents
                   texlive-caption
                   texlive-enumitem
@@ -35690,7 +35692,7 @@ The bundle comes with a set of ready-prepared puzzle files.")
                (base32
                 "07p2fv265g78zbfrq4j33ryz1z1b13g2rvln646w2g5md1zwm2hb"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "lualatex"
@@ -35701,7 +35703,7 @@ The bundle comes with a set of ready-prepared puzzle files.")
                               (("\\\\usepackage\\[T1\\]\\{fontenc\\}")
                                "\\usepackage[LGR, T1]{fontenc}")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-babel-greek
                   texlive-biblatex
                   texlive-biblatex-philosophy
@@ -37065,7 +37067,7 @@ of Applied Sciences}.  These Logos are available in English and in Dutch.")
                (base32
                 "1cv2kadwzwwrw3q98wy7cjjl3084qqp55ki50v7m2ylrjxinwkv4"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -37078,7 +37080,7 @@ of Applied Sciences}.  These Logos are available in English and in Dutch.")
               (substitute* "source/latex/thucoursework/thucoursework.dtx"
                 (("\\\\DocInput\\{\\\\jobname\\.dtx\\}") "")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-booktabs
                   texlive-carlisle
                   texlive-ctex
@@ -38291,13 +38293,13 @@ The font Palatine Parliamentary is required to use this package.")
                (base32
                 "07jzmk0p4l28dxxqqpma4px9riykg0zynnjycyripg2m76a9ah2g"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:link-scripts #~(list "ulqda.pl")
            #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-dot2texi
                   texlive-etoolbox
                   texlive-hypdoc
@@ -40372,13 +40374,13 @@ provides three output modes: LaTeX, PostScript and PDF.")
                (base32
                 "0aa9875am0gxy7fxf3z9xdxva8x9anlx8k82c1hz95s3m119fccs"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:build-targets #~(list "yathesis.dtx")
            #:tex-format "lualatex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-accsupp
                   texlive-alphalph
                   texlive-attachfile2
@@ -48776,7 +48778,7 @@ conversion tools.")
                (base32
                 "1n122230s49jizldn8ps1pfa5dsg8wmh5x8wla4y6rsgjcccqn4s"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -48804,7 +48806,7 @@ conversion tools.")
               (substitute* "source/latex/makecell/makecell.dtx"
                 (("\\\\ttabbox\\[\\\\hsize\\]") "\\ttabbox[10cm]")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-diagbox
                   texlive-etoolbox
                   texlive-float
@@ -53034,7 +53036,7 @@ steps can be customized in various ways.")
                (base32
                 "1lhvbwq979whvjwx9gyfhsxz20x6imhh57xm843zk6068lv0b3wj"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -53052,7 +53054,7 @@ steps can be customized in various ways.")
 \\generate{\\file{robotarm.sty}{\\from{robotarm.dtx}{robotarm-package}}}
 \\endbatchfile"))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-hypdoc
                   texlive-tools))))
     (home-page "https://ctan.org/pkg/robotarm")
@@ -61232,7 +61234,7 @@ the fonts within maths.")
                (base32
                 "0x3fhz582xcv33s9yiwka82j8bz3nxribgmni3j8j03r6dih8d8r"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:build-targets #~(list "bbold.dtx")
@@ -61247,7 +61249,7 @@ the fonts within maths.")
                      (("\\\\DocInput\\{bbold\\.dtx\\}") "")))))))
     (native-inputs
      (list texlive-metafont
-           (texlive-updmap.cfg
+           (texlive-local-tree
             (list texlive-etoolbox texlive-hypdoc))))
     (home-page "https://ctan.org/pkg/bbold")
     (synopsis "Sans serif blackboard bold")
@@ -62520,10 +62522,10 @@ provided.")
                (base32
                 "08lc76yglblidg24s5ap9j0xmzbxgsfwcf9f6g1m4bwbqwkh089x"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
-    (native-inputs (list (texlive-updmap.cfg
+    (native-inputs (list (texlive-local-tree
                           (list texlive-etoolbox
                                 texlive-hypdoc))))
     (home-page "https://ctan.org/pkg/babel-romansh")
@@ -67427,7 +67429,7 @@ with traditional TeX as well as with Unicode aware variants.")
                (base32
                 "1r5l5c586zzvkyz8irj47pb86m4hkarc7617hvz8gsx1qqnf4463"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -67458,7 +67460,7 @@ with traditional TeX as well as with Unicode aware variants.")
            font-linuxlibertine
            font-sil-ezra
            fontconfig
-           (texlive-updmap.cfg
+           (texlive-local-tree
             (list texlive-amiri
                   texlive-babel
                   texlive-bidi
@@ -68846,11 +68848,11 @@ TeX, and LaTeX font definition and other relevant files.")
                (base32
                 "13kw7xkc3bpa494mzfphl2v3yn6y08013qnrp3h9awq4blgi2y8b"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "lualatex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-booktabs
                   texlive-etoolbox
                   texlive-hypdoc
@@ -71492,7 +71494,7 @@ dynamic bibliography sets and many other features.")
                       (string-append "--prefix=" #$output)
                       "--root=/"))))))
     (native-inputs
-     (list texinfo (texlive-updmap.cfg (list texlive-texinfo))))
+     (list texinfo (texlive-local-tree (list texlive-texinfo))))
     (inputs (list python-wrapper))
     (home-page "https://gitlab.com/latex-rubber/rubber/")
     (synopsis "Wrapper for LaTeX and friends")
@@ -71660,7 +71662,7 @@ and PostScript specials.  A working TeX installation is needed.")
       (native-inputs
        (list autoconf
              automake
-             (texlive-updmap.cfg
+             (texlive-local-tree
               (list texlive-mflogo-font
                     texlive-palatino
                     texlive-zapfding))))
@@ -77191,7 +77193,7 @@ produced using PSTricks.")
                (base32
                 "0nclsazny3hnzsi2vcixh2g1gsj5lvwxls1v569rms8ykgd9v7z8"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -77208,7 +77210,7 @@ produced using PSTricks.")
                 (("usepackage\\{xcolor\\}")
                  "usepackage[dvips]{xcolor}")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-footmisc
                   texlive-fourier
@@ -78449,7 +78451,7 @@ the @code{psnfss} distribution.")
                (base32
                 "097lh7ksw9rg93f1c7a4fqglgfpydf1qp3sbgy9xfgszcdpknmrk"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -78469,7 +78471,7 @@ the @code{psnfss} distribution.")
     (native-inputs
      (list font-gnu-freefont
            fontconfig
-           (texlive-updmap.cfg
+           (texlive-local-tree
             (list texlive-amsmath
                   texlive-amsfonts
                   texlive-bidi
@@ -84456,11 +84458,11 @@ diagrams (specially in power electronics).")
                (base32
                 "0xkv6rvkbchkwgfam5kiymng0xnc4vja5xb3b5d89rngdr041xwk"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-fancyvrb
                   texlive-hypdoc
@@ -85276,11 +85278,11 @@ LaTeX documents, using the TikZ package.")
                (base32
                 "16kbmf9fckms0vhi41h2p6k8znv6plzwn4f2j374zmpqphq1m3il"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-hypdoc
                   texlive-layaureo
@@ -85784,11 +85786,11 @@ files.")
                (base32
                 "0qy3ri6fdgzdslaaa7gakswvpc299xyarm8ng4cs8w64q14675r1"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-charter
                   texlive-emp
                   texlive-etoolbox
@@ -87101,7 +87103,7 @@ in terms of the collating order of the text being processed.")
                      (format #f "our $clisp = ~s;~%"
                              (search-input-file inputs "/bin/clisp")))))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-cbfonts-fd
                   texlive-cyrillic
                   texlive-etoolbox
@@ -89693,11 +89695,11 @@ letters in their names may be defined.")
                (base32
                 "0rcw2d5ncq8avk33nxika34q3da1v4kcmr6jqdxdg49bq4h8ljs7"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-bera
                   texlive-enumitem
                   texlive-etoolbox
@@ -90912,11 +90914,11 @@ terms and acronyms with their expanded form.")
                (base32
                 "0j8z47n0aawhvz2s4i0pwfp7yq1vqsxbd2sjx7f955n6k2f54hhw"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-enumitem
                   texlive-etoolbox
                   texlive-framed
@@ -90957,7 +90959,7 @@ joint status in symbols of life contingencies.")
                (base32
                 "1rnipnm3crv9qmcf7icymizkp4bkkaa1p50qfni04aq89csqnkwq"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -90976,7 +90978,7 @@ joint status in symbols of life contingencies.")
                                 (getcwd) "/doc/latex/actuarialsymbol/mosaic.jpg"
                                 "}"))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-actuarialangle
                   texlive-booktabs
                   texlive-enumitem
@@ -91996,11 +91998,11 @@ equations that are referenced.  This operation is similar to the
                (base32
                 "0sdlazmx6g530ava1ip8mafbd2p57i7mf8sdlg3y1m4bvq244v4m"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "pdflatex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-catchfile
                   texlive-cm-super
                   texlive-etoolbox
@@ -101333,11 +101335,11 @@ Metafont source and LaTeX macro support.")
                (base32
                 "12ljghlhh7li8pgpaa39gnsvvn4l4bmww74zik4q3qmirkhvi949"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-filecontents
                   texlive-footmisc
@@ -102046,7 +102048,7 @@ LaTeX, to generate a nice solution book.")
                (base32
                 "1w2nsgfyhjzg0gwr3rzhq13jh7lj63lh36qjv16hayd2kxrcpb62"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "latex"
@@ -102056,7 +102058,7 @@ LaTeX, to generate a nice solution book.")
                ;; only be declared at top-level!".  Skip build.
                (delete 'build))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-float
                   texlive-fourier
@@ -103592,7 +103594,7 @@ rather than being numbered sequentially through the document.")
                (base32
                 "1xbl5lzyd264avy3dkqz7yq8imk6pziaalhi7smh9d4jra6412a3"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -103601,7 +103603,7 @@ rather than being numbered sequentially through the document.")
           ;; FIXME: I couldn't find how to build this package without error.
           (delete 'build))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-breakurl
                   texlive-caption
                   texlive-examplep
@@ -105304,11 +105306,11 @@ supported.")
                (base32
                 "1vppjv24cwnizg96pyhj68g2wx8dd4193c6bm2k4visqwpnwh95p"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-footmisc
                   texlive-fourier
@@ -105647,11 +105649,11 @@ environments.")
                (base32
                 "0xszyc03vf7h160gxqfd8yfs4aya7s17av4ylf9nc6abbvwipapk"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-eepic
                   texlive-etoolbox
                   texlive-hypdoc
@@ -112255,11 +112257,11 @@ minimize writing and production time and cost.")
                (base32
                 "1k4j0rjfl0cy0in272k3dyiqzq5nc31zhygqckfvaw328mkkagz9"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox texlive-hypdoc texlive-ntgclass))))
     (home-page "https://ctan.org/pkg/namespc")
     (synopsis "Rudimentary C++-like namespaces in LaTeX")
@@ -112436,7 +112438,7 @@ all sizing is set automatically.")
                (base32
                 "1naa0w3bvnj709msfq9kk6yb7b5qf1sahisjr7z8bfs1q17ml8xc"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list
@@ -112453,7 +112455,7 @@ all sizing is set automatically.")
                                 (getcwd) "/doc/latex/newspaper/Figure" n ".pdf"
                                 "}"))))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox texlive-hypdoc texlive-pdflscape))))
     (home-page "https://ctan.org/pkg/newspaper")
     (synopsis "Typeset newsletters to resemble newspapers")
@@ -115704,7 +115706,7 @@ including back links.")
                (base32
                 "1b5fmrzaif2d7rwbwlpd9xdykpw1r5p5cpjqiw3gs1f3241p43f4"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (home-page "https://ctan.org/pkg/powerdot")
     (arguments
@@ -115718,7 +115720,7 @@ including back links.")
                        (substitute* "source/latex/powerdot/powerdot.dtx"
                          (("\\\\DocInput\\{powerdot\\.dtx\\}") "")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-enumitem
                   texlive-etoolbox
                   texlive-fourier
@@ -116926,10 +116928,10 @@ binder cover sheets.")
                (base32
                 "0794jd9d28rjvwk6bx93al2dcavjrb341yjmivhmq74d504wahpf"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
-    (native-inputs (list (texlive-updmap.cfg
+    (native-inputs (list (texlive-local-tree
                           (list texlive-etoolbox texlive-hypdoc))))
     (home-page "https://ctan.org/pkg/recipecard")
     (synopsis "Typeset recipes in note-card-sized boxes")
@@ -119081,11 +119083,11 @@ document.")
                (base32
                 "1j1cb5qy25qni8wq1kaf6p6c0whzrbymhm00g4jjajaizagm4ki2"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-babel
                   texlive-etoolbox
                   texlive-hypdoc
@@ -121090,11 +121092,11 @@ to provide several tables.")
                (base32
                 "1bwwqzdfsqnm338qwnc0lnyskk58k6s4lr0v2gfizskamzygmi1b"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-fontinst
                   texlive-helvetic
@@ -121563,11 +121565,11 @@ from a template document.)")
                (base32
                 "0vkp71bpmhs3ys29cx4sxcvqqx63pqym6n87j3sr5hy7rw20ya0x"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-hypdoc
                   texlive-lm
@@ -124528,11 +124530,11 @@ formats.")
                (base32
                 "1gbdnc1k819fncvnhzihx9q6qdxsrkpfjy47dh70bdwqf5klhqbh"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments (list #:tex-format "latex"))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-etoolbox
                   texlive-hypdoc
                   texlive-lm
@@ -125051,7 +125053,7 @@ only if it is necessary.")
                (base32
                 "01khzfgkvsfs8vs64wym07k5hnaa0rmcgpgajp1q06g5f9shcsjc"))))
     (outputs '("out" "doc"))
-    (properties '((updater-extra-native-inputs "texlive-updmap.cfg")))
+    (properties '((updater-extra-native-inputs "texlive-local-tree")))
     (build-system texlive-build-system)
     (arguments
      (list #:tex-format "latex"
@@ -125064,7 +125066,7 @@ only if it is necessary.")
                    (substitute* "source/latex/xpeek/xpeek.dtx"
                      (("\\\\DocInput\\{\\\\jobname\\.dtx\\}") "")))))))
     (native-inputs
-     (list (texlive-updmap.cfg
+     (list (texlive-local-tree
             (list texlive-alphalph
                   texlive-booktabs
                   texlive-csquotes
