@@ -340,14 +340,18 @@ should not be installed in a profile.")
               (substitute* "texk/kpathsea/texmf.cnf"
                 (("^TEXMFROOT = .*") "TEXMFROOT = {$GUIX_TEXMF}/..\n")
                 (("^TEXMFDIST = .*") "TEXMFDIST = {$GUIX_TEXMF}\n")
-                ;; "ls-R" files are to be expected only in the TEXMFDIST
-                ;; directories.
-                (("^TEXMF = .*")
-                 "TEXMF = {$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFSYSCONFIG,$TEXMFSYSVAR,!!$TEXMFDIST}\n")
-                (("^TEXMFDBS = .*") "TEXMFDBS = {$TEXMFDIST}\n")
-                ;; Ignore system-wide cache, which is not writable.  Use local
-                ;; one instead, i.e. "$HOME/.texliveYYYY/texmf-var/".
+                ;; Use XDG recommendations for local variables.  Also ignore
+                ;; system-wide cache, which is not writable; use local one
+                ;; instead, i.e., "$XDG_CACHE_HOME/.texliveYYYY/texmf-var/".
+                (("^TEXMFVAR = ~/") "TEXMFVAR = $XDG_CACHE_HOME/")
+                (("^TEXMFCONFIG = ~/") "TEXMFCONFIG = $XDG_CONFIG_HOME/")
                 (("^TEXMFCACHE = .*") "TEXMFCACHE = $TEXMFVAR\n")
+                ;; "ls-R" files are to be expected only in the TEXMFDIST
+                ;; directories.  TEXMFLOCAL is not necessary for Guix, but
+                ;; could be required anyway by external TeX installations.
+                (("^TEXMF = .*")
+                 "TEXMF = {$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,!!TEXMFLOCAL,TEXMFSYSVAR,TEXMFSYSCONFIG,!!$TEXMFDIST}\n")
+                (("^TEXMFDBS = .*") "TEXMFDBS = {!!$TEXMFLOCAL,!!$TEXMFDIST}\n")
                 ;; Set TEXMFCNF.  Since earlier values of variables have
                 ;; precedence over later ones, insert the desired value first.
                 (("^TEXMFCNF =")
@@ -65882,7 +65886,7 @@ iterate, apply, etc., to the table.")
                 (("TEXMFSYSCONFIG *=.*")
                  "TEXMFSYSCONFIG = \"$TEXMFDIST/../texmf-config\",\n")
                 (("TEXMF *=.*")
-                 "TEXMF = \"{$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFSYSCONFIG,$TEXMFSYSVAR,$TEXMFDIST}\",\n")))))))
+                 "TEXMF = \"{$TEXMFCONFIG,$TEXMFVAR,$TEXMFHOME,$TEXMFLOCAL,$TEXMFSYSCONFIG,$TEXMFSYSVAR,$TEXMFDIST}\",\n")))))))
     (native-inputs
      (list (if (target-64bit?) libfaketime datefudge)
            texlive-kpathsea))
