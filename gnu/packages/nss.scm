@@ -219,9 +219,9 @@ in the Mozilla clients.")
                       ;; The script fails to determine the source
                       ;; directory when running under 'datefudge' (see
                       ;; <https://issues.guix.gnu.org/72239>).  Help it.
-                      ((substitute* "nss/tests/gtests/gtests.sh"
-                         (("SOURCE_DIR=.*")
-                          (string-append "SOURCE_DIR=" (getcwd) "/nss\n")))))
+                      (substitute* "nss/tests/gtests/gtests.sh"
+                        (("SOURCE_DIR=.*")
+                         (string-append "SOURCE_DIR=" (getcwd) "/nss\n"))))
 
                     ;; The "PayPalEE.cert" certificate expires every six months,
                     ;; leading to test failures:
