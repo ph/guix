@@ -41,6 +41,8 @@
   #:use-module ((srfi srfi-1) #:hide (zip))
   #:use-module (ice-9 format)
   #:use-module (ice-9 match)
+  #:autoload (ice-9 pretty-print) (pretty-print)
+  #:autoload (ice-9 textual-ports) (get-string-all)
   #:use-module (gnu packages)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
@@ -74,6 +76,7 @@
   #:use-module (gnu packages linux)
   #:use-module (gnu packages perl)
   #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages python-web)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages fontutils)
   #:use-module (gnu packages fonts)
@@ -100,6 +103,7 @@
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages readline)
   #:use-module (gnu packages sqlite)
+  #:use-module (gnu packages time)
   #:autoload (json parser) (json->scm))
 
 (define-public mozjs
@@ -695,7 +699,7 @@ variable defined below.  It requires guile-json to be installed."
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/mozilla/compare-locales")
-          (commit "RELEASE_9_0_4")))
+          (commit "RELEASE_9_0_4")))    ;use the latest release
     (file-name "mozilla-compare-locales")
     (sha256 (base32 "13qn983j0pgs2550fgd5gvnl4lq6ywqjvgbyx850jwg79w8b0ifz"))))
 
@@ -703,25 +707,143 @@ variable defined below.  It requires guile-json to be installed."
   (origin
     (method git-fetch)
     (uri (git-reference
-          (url "https://github.com/mozilla-l10n/firefox-l10n")
-          (commit "fcd0300e8478d1ec4d1c097a073ddb8e1e0351e3")))
+           (url "https://github.com/mozilla-l10n/firefox-l10n")
+           ;; Use the revision specified in the
+           ;; browser/locales/l10n-changesets.json file of the used firefox
+           ;; source (all the languages normally use the same revision).
+          (commit "64046fdc97c1b1886a479dead61e6dc5428ae6e6")))
     (file-name "mozilla-l10n")
-    (sha256 (base32 "1pzw65852ix6a6qb3wwhg5vrkz8337cs6lznk2vj0md5cvf2rrc4"))))
+    (sha256 (base32 "1rvk1m8bjnk9x61663s7bhgax6ig37v9m1d64g89fk1qwsk3djhh"))))
 
+(define (format-locales all-locales-file)
+  "Format a Scheme list of all the locales string found in ALL-LOCALES-FILE.
+In the case of Thunderbird, that file is comm/mail/locales/all-locales, while
+in the case of Firefox, it is browser/locales/all-locales."
+  (pretty-print (string-split
+                 (string-trim-right
+                  (call-with-input-file all-locales-file
+                    get-string-all))
+                 #\newline)))
+
+;;; To regenerate, use the above `format-locales' procedure.
 (define %icecat-locales
-  '("ach" "af" "an" "ar" "ast" "az" "be" "bg" "bn" "br" "bs" "ca" "cak"
-    "ca-valencia" "cs" "cy" "da" "de" "dsb" "el" "en-CA" "en-GB" "eo"
-    "es-AR" "es-CL" "es-ES" "es-MX" "et" "eu" "fa" "ff" "fi" "fr" "fur"
-    "fy-NL" "ga-IE" "gd" "gl" "gn" "gu-IN" "he" "hi-IN" "hr" "hsb" "hu"
-    "hy-AM" "ia" "id" "is" "it" "ja" "ja-JP-mac" "ka" "kab" "kk" "km"
-    "kn" "ko" "lij" "lt" "lv" "mk" "mr" "ms" "my" "nb-NO" "ne-NP" "nl"
-    "nn-NO" "oc" "pa-IN" "pl" "pt-BR" "pt-PT" "rm" "ro" "ru" "sat" "sc"
-    "sco" "si" "sk" "skr" "sl" "son" "sq" "sr" "sv-SE" "szl" "ta" "te"
-    "tg" "th" "tl" "tr" "trs" "uk" "ur" "uz" "vi" "xh" "zh-CN" "zh-TW"))
+  '("ach"
+    "af"
+    "an"
+    "ar"
+    "ast"
+    "az"
+    "be"
+    "bg"
+    "bn"
+    "bo"
+    "br"
+    "brx"
+    "bs"
+    "ca"
+    "ca-valencia"
+    "cak"
+    "ckb"
+    "cs"
+    "cy"
+    "da"
+    "de"
+    "dsb"
+    "el"
+    "en-CA"
+    "en-GB"
+    "eo"
+    "es-AR"
+    "es-CL"
+    "es-ES"
+    "es-MX"
+    "et"
+    "eu"
+    "fa"
+    "ff"
+    "fi"
+    "fr"
+    "fur"
+    "fy-NL"
+    "ga-IE"
+    "gd"
+    "gl"
+    "gn"
+    "gu-IN"
+    "he"
+    "hi-IN"
+    "hr"
+    "hsb"
+    "hu"
+    "hy-AM"
+    "hye"
+    "ia"
+    "id"
+    "is"
+    "it"
+    "ja"
+    "ja-JP-mac"
+    "ka"
+    "kab"
+    "kk"
+    "km"
+    "kn"
+    "ko"
+    "lij"
+    "lo"
+    "lt"
+    "ltg"
+    "lv"
+    "meh"
+    "mk"
+    "ml"
+    "mr"
+    "ms"
+    "my"
+    "nb-NO"
+    "ne-NP"
+    "nl"
+    "nn-NO"
+    "oc"
+    "pa-IN"
+    "pl"
+    "pt-BR"
+    "pt-PT"
+    "rm"
+    "ro"
+    "ru"
+    "sat"
+    "sc"
+    "scn"
+    "sco"
+    "si"
+    "sk"
+    "skr"
+    "sl"
+    "son"
+    "sq"
+    "sr"
+    "sv-SE"
+    "szl"
+    "ta"
+    "te"
+    "tg"
+    "th"
+    "tl"
+    "tr"
+    "trs"
+    "uk"
+    "ur"
+    "uz"
+    "vi"
+    "wo"
+    "xh"
+    "zh-CN"
+    "zh-TW"))
 
-(define %icecat-base-version "128.14.0")
+(define %icecat-base-version "140.3.0")
 (define %icecat-version (string-append %icecat-base-version "-gnu1"))
-(define %icecat-build-id "20250819000000") ;must be of the form YYYYMMDDhhmmss
+(define %icecat-build-id "20250916000000") ;must be of the form YYYYMMDDhhmmss
 
 ;; 'icecat-source' is a "computed" origin that generates an IceCat tarball
 ;; from the corresponding upstream Firefox ESR tarball, using the 'makeicecat'
@@ -741,9 +863,9 @@ variable defined below.  It requires guile-json to be installed."
                   "firefox-" upstream-firefox-version ".source.tar.xz"))
             (sha256
              (base32
-              "0lwsn1y988naxs9031sbzsh9b0x7c6zmpf89y4pv477l55ifzfck"))))
+              "05i3czn3v2qnhir8apcphbqy7rmy1dn7kcwx5yyi2qvmjcyfpipg"))))
 
-         (gnuzilla-commit "ba161be3de71bb556be951ac4dbb81c807f68770")
+         (gnuzilla-commit "c939d76c33294791cce8ce1722bd6747dadbe31f")
          (gnuzilla-source
           (origin
             (method git-fetch)
@@ -754,7 +876,7 @@ variable defined below.  It requires guile-json to be installed."
                                       (string-take gnuzilla-commit 8)))
             (sha256
              (base32
-              "0gcpwxjz407lgjg8p3mgaij10xy1p6j3sbij46mi8h18d4q1iagg"))))
+              "03ly055r77fprm53474998hyjhb1a78spyxjs7998npyqzv3fscs"))))
 
          ;; 'search-patch' returns either a valid file name or #f, so wrap it
          ;; in 'assume-valid-file-name' to avoid 'local-file' warnings.
@@ -764,7 +886,7 @@ variable defined below.  It requires guile-json to be installed."
 
     (origin
       (method computed-origin-method)
-      (file-name (string-append "icecat-" %icecat-version ".tar.xz"))
+      (file-name (string-append "icecat-" %icecat-version ".tar.zst"))
       (sha256 #f)
       (uri
        (delay
@@ -784,6 +906,7 @@ variable defined below.  It requires guile-json to be installed."
                        #+(canonical-package findutils)
                        #+(canonical-package patch)
                        #+(canonical-package xz)
+                       #+(canonical-package zstd)
                        #+(canonical-package sed)
                        #+(canonical-package grep)
                        #+(canonical-package bzip2)
@@ -844,27 +967,23 @@ variable defined below.  It requires guile-json to be installed."
                   (with-directory-excursion "l10n"
                     (for-each
                      (lambda (locale)
-                       (let ((locale-dir
-                              (string-append #+mozilla-l10n "/" locale)))
+                       (let ((locale-dir (string-append #+mozilla-l10n "/"
+                                                        locale)))
                          (format #t "  ~a~%" locale)
                          (force-output)
                          (copy-recursively locale-dir locale
                                            #:log (%make-void-port "w"))
                          (for-each make-file-writable (find-files locale))
                          (with-directory-excursion locale
-                           (when (file-exists? ".hgtags")
-                             (delete-file ".hgtags"))
                            (mkdir-p "browser/chrome/browser/preferences")
-                           (call-with-output-file
-                               "browser/chrome/browser/preferences/advanced-scripts.dtd"
+                           (call-with-output-file "browser/chrome/browser/\
+preferences/advanced-scripts.dtd"
                              (lambda (port) #f)))))
                      '#+%icecat-locales)
                     (copy-recursively #+mozilla-compare-locales
                                       "compare-locales"
                                       #:log (%make-void-port "w"))
-                    (delete-file "compare-locales/.gitignore")
-                    (delete-file "compare-locales/.hgignore")
-                    (delete-file "compare-locales/.hgtags")))
+                    (delete-file "compare-locales/.gitignore")))
 
                 (format #t "Running makeicecat script...~%")
                 (force-output)
@@ -872,7 +991,7 @@ variable defined below.  It requires guile-json to be installed."
 
                 (format #t "Packing IceCat source tarball...~%")
                 (force-output)
-                (setenv "XZ_DEFAULTS" (string-join (%xz-parallel-args)))
+                (setenv "ZSTD_NBTHREADS" (number->string (parallel-job-count)))
                 (invoke "tar" "cfa" #$output
                         ;; Avoid non-determinism in the archive.  We set the
                         ;; mtime of files in the archive to early 1980 because
@@ -909,7 +1028,7 @@ variable defined below.  It requires guile-json to be installed."
            libcanberra
            libgnome
            libjpeg-turbo
-           libpng-apng
+           libpng-apng-next
            ;; UNBUNDLE-ME! libogg
            ;; UNBUNDLE-ME! libtheora ; wants theora-1.2, not yet released
            ;; UNBUNDLE-ME! libvorbis
@@ -922,7 +1041,7 @@ variable defined below.  It requires guile-json to be installed."
            libffi
            ffmpeg
            libvpx
-           icu4c
+           icu4c-77
            pixman
            pulseaudio
            mesa
@@ -974,6 +1093,7 @@ variable defined below.  It requires guile-json to be installed."
 
       #:configure-flags
       #~(list
+         "--disable-fhs"
          "--enable-application=browser"
          "--with-distribution-id=org.gnu"
          "--enable-geckodriver"
@@ -1010,8 +1130,6 @@ variable defined below.  It requires guile-json to be installed."
          (string-append "--with-libclang-path="
                         (dirname (search-input-file %build-inputs
                                                     "lib/libclang.so")))
-
-         "--enable-official-branding"
 
          ;; TODO: Add support for wasm sandboxed libraries.
          "--without-wasm-sandboxed-libraries"
@@ -1058,7 +1176,9 @@ variable defined below.  It requires guile-json to be installed."
                '(#$(local-file
                     (search-patch "icecat-compare-paths.patch"))
                  #$(local-file
-                    (search-patch "icecat-use-system-wide-dir.patch"))))))
+                    (search-patch "icecat-use-system-wide-dir.patch"))
+                 #$(local-file
+                    (search-patch "icecat-fhs-configure-option.patch"))))))
           (add-after 'apply-guix-specific-patches 'remove-bundled-libraries
             (lambda _
               ;; Remove bundled libraries that we don't use, since they may
@@ -1176,7 +1296,9 @@ variable defined below.  It requires guile-json to be installed."
               ;; complain that it's not able to change Cargo.lock.
               ;; https://bugzilla.mozilla.org/show_bug.cgi?id=1726373
               (substitute* "build/RunCbindgen.py"
-                (("args.append\\(\"--frozen\"\\)") "pass"))))
+                (("args.append\\(\"--frozen\"\\)") "pass"))
+              (substitute* "config/makefiles/rust.mk"
+                (("cargo_build_flags \\+= --frozen") ""))))
           (delete 'bootstrap)
           (replace 'configure
             ;; configure does not work followed by both "SHELL=..." and
@@ -1255,7 +1377,28 @@ variable defined below.  It requires guile-json to be installed."
               ;; reason.  Use 'find-files' to avoid having to deal with the
               ;; system/architecture-specific file name.
               (install-file (first (find-files "." "geckodriver"))
-                            (string-append #$output "/bin"))))
+                            (string-append #$output "/bin"))
+              ;; Install a policies.json file as an extra step to ensure
+              ;; IceCat does not call home.  The available policies can be
+              ;; found at <https://mozilla.github.io/policy-templates/>.
+
+              ;; TODO: Disable remote settings feature when it becomes
+              ;; possible to do so (see:
+              ;; <https://bugzilla.mozilla.org/show_bug.cgi?id=1988070>).
+              (let ((policies.json (string-append
+                                    #$output
+                                    "/lib/icecat/distribution/policies.json")))
+                (mkdir-p (dirname policies.json))
+                (call-with-output-file policies.json
+                  (lambda (p)
+                    (format p "\
+{
+  \"policies\": {
+    \"DisableFirefoxAccounts\": true,
+    \"DisableTelemetry\": true,
+    \"DisablePocket\": true
+  }
+}~%"))))))
           (add-after 'install 'wrap-program
             (lambda* (#:key inputs #:allow-other-keys)
               (let* ((lib (string-append #$output "/lib"))
@@ -1287,20 +1430,24 @@ variable defined below.  It requires guile-json to be installed."
           (add-after 'wrap-program 'install-desktop-entry
             (lambda _
               ;; Install the '.desktop' file.
-              (let* ((desktop-file "taskcluster/docker/icecat-snap/icecat.desktop")
+              (let* ((desktop-file (string-append "toolkit/mozapps/installer"
+                                                  "/linux/rpm/mozilla.desktop"))
                      (applications (string-append #$output "/share/applications")))
                 (substitute* desktop-file
-                  (("^Exec=icecat")     (string-append "Exec=" #$output "/bin/icecat"))
-                  (("IceCat")           "GNU IceCat")
-                  (("Icon=.*")          "Icon=icecat\n")
-                  (("NewWindow")        "new-window")
-                  (("NewPrivateWindow") "new-private-window")
-                  (("StartupNotify=true")
-                   "StartupNotify=true\nStartupWMClass=Icecat"))
-                (install-file desktop-file applications))))
+                  (("@MOZ_APP_NAME@")
+                   "icecat")
+                  (("^Exec=icecat")
+                   (string-append "Exec=" #$output "/bin/icecat"))
+                  (("@MOZ_APP_DISPLAYNAME@")
+                   "GNU IceCat")
+                  (("@MOZ_APP_REMOTINGNAME@")
+                   "Icecat"))
+                (mkdir-p applications)
+                (copy-file desktop-file
+                           (string-append applications "/icecat.desktop")))))
           (add-after 'install-desktop-entry 'install-icons
             (lambda _
-              (with-directory-excursion "browser/branding/official"
+              (with-directory-excursion "browser/branding/unofficial"
                 (for-each
                  (lambda (file)
                    (let* ((size (string-filter char-numeric? file))
@@ -1309,13 +1456,13 @@ variable defined below.  It requires guile-json to be installed."
                      (mkdir-p icons)
                      (copy-file file (string-append icons "/icecat.png"))))
                  '("default16.png" "default22.png" "default24.png"
-                   "default32.png" "default48.png" "content/icon64.png"
-                   "mozicon128.png" "default256.png"))))))))
+                   "default32.png" "default48.png" "default256.png"
+                   "content/icon64.png" "mozicon128.png" ))))))))
     (native-search-paths
      (list (search-path-specification
-            (variable "ICECAT_SYSTEM_DIR")
-            (separator #f)              ;single entry
-            (files '("lib/icecat")))))
+             (variable "MOZILLA_SYSTEM_DIR")
+             (separator #f)             ;single entry
+             (files '("lib/icecat")))))
     (home-page "https://www.gnu.org/software/gnuzilla/")
     (synopsis "Entirely free browser derived from Mozilla Firefox")
     (description
@@ -1790,7 +1937,10 @@ their corresponding VERSION, SOURCE and LOCALES variables."
 
   (let ((name (if (eq? 'icecat project)
                   "IceCat"
-                  "Icedove")))
+                  "Icedove"))
+        ;; XXX TODO: Delete the following variable, and eliminate its
+        ;; references below, when Icedove has been updated to 140.x.
+        (v115? (string-prefix? "115." version)))
     (package
       (name (format #f "~a-l10n" project))
       (version version)
@@ -1833,9 +1983,12 @@ their corresponding VERSION, SOURCE and LOCALES variables."
                         (string-append (getcwd) "/mach_state"))
                 (setenv "MOZCONFIG" (string-append (getcwd) "/.mozconfig"))
                 (setenv "MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE" "system")
-                (setenv "GUIX_PYTHONPATH"
-                        (string-append (getcwd)
-                                       "/obj/_virtualenvs/build/lib/python3.11/site-packages"))
+                ;; XXX TODO: Remove the following 'when' form (including
+                ;; its body) when Icedove has been updated to 140.x.
+                (when '#$v115?
+                  (setenv "GUIX_PYTHONPATH"
+                          (string-append (getcwd)
+                                         "/obj/_virtualenvs/build/lib/python3.11/site-packages")))
                 (setenv "BUILD_BACKENDS" "FasterMake,RecursiveMake")))
             (replace 'build             ;build and install data files
               (lambda* (#:key outputs #:allow-other-keys)
@@ -1844,6 +1997,17 @@ their corresponding VERSION, SOURCE and LOCALES variables."
                     (when (null? files)
                       (error "could not find file in dir" name dir))
                     (car files)))
+
+                ;; XXX TODO: Replace the following 'unless' form with its body,
+                ;; (to be run unconditionally) when Icedove has been
+                ;; updated to 140.x.
+                (unless '#$v115?
+                  ;; Register "tb_common" as a valid site, to please the mach
+                  ;; virtualenv machinery (see:
+                  ;; <https://bugzilla.mozilla.org/show_bug.cgi?id=1986420>).
+                  (substitute* "python/mach/mach/site.py"
+                    (("\"mach\", \"build\", \"common\"" all)
+                     (string-append all ", \"tb_common\""))))
 
                 (for-each
                  (lambda (l)
@@ -1868,10 +2032,9 @@ their corresponding VERSION, SOURCE and LOCALES variables."
                                               'thunderbird
                                               '#$project))))
                      (format #t "processing locale `~a'...~%" l)
-                     ;; XXX: For some reasons, on version 115, there are some
-                     ;; parsing errors that cause the build system to
-                     ;; return an unclean exit code; use system* to ignore
-                     ;; errors.
+                     ;; TODO: Revert to use 'invoke' here, after
+                     ;; <https://bugzilla.mozilla.org/show_bug.cgi?id=1988069>
+                     ;; is fixed.
                      (system* "./mach" "build" (string-append "langpack-" l))
                      (mkdir-p ext-dir)
                      (let ((xpi (find-file "obj" (string-append
@@ -1886,7 +2049,12 @@ their corresponding VERSION, SOURCE and LOCALES variables."
       (native-inputs
        (list m4
              perl
-             python-wrapper
+             ;; XXX TODO: Replace the following 'if' form with
+             ;; 'python' when Icedove has been updated to 140.x.
+             (if '#$v115? python-wrapper python)
+             python-aiohttp
+             python-async-timeout
+             python-dateutil
              node-lts
              unzip))
       (home-page "https://www.mozilla.org/")
